@@ -4,8 +4,7 @@ App for Android OS to track sport activities. User is rewarded with credits for 
 
 ### TODO:
 
-- choose map API
+- choose map API (OpenStreetMap?)
 - implement GPS tracking
-- rules for credit gain
+- rules for credit gain (Max velocity ~8 kph?)
 - UI design
-
