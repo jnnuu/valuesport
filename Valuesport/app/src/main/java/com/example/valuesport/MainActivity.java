@@ -1,6 +1,7 @@
 package com.example.valuesport;
 
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
@@ -29,7 +30,8 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         switch (menuItem.getItemId()) {
             case R.id.store:
                 // tähän store activity (intent intent startPsykoosit())
-                Toast.makeText(this, "kauppaa klikattu", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(this, "kauppaa klikattu", Toast.LENGTH_SHORT).show();
+                toStore();
                 return true;
             case R.id.wallet:
                 // tähän wallet activity (intent intent startPsykoosit())
@@ -45,5 +47,9 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             default:
                 return false;
         }
+    }
+    public void toStore() {
+        Intent intent = new Intent(this, BuyCouponActivity.class);
+        startActivity(intent);
     }
 }
