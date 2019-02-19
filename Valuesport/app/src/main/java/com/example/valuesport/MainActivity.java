@@ -35,7 +35,10 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 return true;
             case R.id.wallet:
                 // tähän wallet activity (intent intent startPsykoosit())
-                Toast.makeText(this, "lompsaa klikattu", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, WalletActivity.class);
+                startActivity(intent);
+
+                //Toast.makeText(this, "lompsaa klikattu", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.exit:
                 // tähän exitti tai poista tämä case

@@ -5,6 +5,7 @@ App for Android OS to track sport activities. User is rewarded with credits for 
 ### TODO:
 
 - choose map API (OpenStreetMap?)
-- implement GPS tracking
+- implement GPS tracking and class for distance calculation
+- way to manage products and credits (class + listview, JSON for storing?)
 - rules for credit gain (Max velocity ~8 kph?)
 - UI design
