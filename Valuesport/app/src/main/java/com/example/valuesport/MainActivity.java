@@ -56,7 +56,8 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         Intent intent = new Intent(this, WalletActivity.class);
         startActivity(intent);
     }
-    public void StartExc() {
-        
+    public void StartExc(View view) {
+        Intent intent = new Intent(this, ExerciseActivity.class);
+        startActivity(intent);
     }
 }

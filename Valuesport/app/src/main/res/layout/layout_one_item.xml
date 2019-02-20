@@ -15,7 +15,7 @@
         android:text="euron juusto hesasta :D"
         android:id="@+id/image_name"
         android:layout_toRightOf="@id/image"
-        android:textColor="#000"
+        android:textColor="@color/white"
         android:layout_centerVertical="true"
         android:layout_marginLeft="24dp"
         android:textSize="20sp"
