@@ -35,15 +35,12 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 return true;
             case R.id.wallet:
                 // tähän wallet activity (intent intent startPsykoosit())
-                Intent intent = new Intent(this, WalletActivity.class);
-                startActivity(intent);
-
-                //Toast.makeText(this, "lompsaa klikattu", Toast.LENGTH_SHORT).show();
+                toWallet();
                 return true;
-            case R.id.exit:
+            /*case R.id.exit: //exittiä "ei ole olemassa" androidissa
                 // tähän exitti tai poista tämä case
                 Toast.makeText(this, "poistumista yritetty :D", Toast.LENGTH_SHORT).show();
-                return true;
+                return true;*/
             // tähän on helppo lisätä mitä mieleen tulee. R.id.store / R.id.wallet jne resurssit löytyvät
             // app/res/menu/mainmenu.xml
             // ton toastin voi poistaa myöhemmin, kun nappia painamalla aukeaa uusi activity.
@@ -54,5 +51,12 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     public void toStore() {
         Intent intent = new Intent(this, BuyCouponActivity.class);
         startActivity(intent);
+    }
+    public void toWallet() {
+        Intent intent = new Intent(this, WalletActivity.class);
+        startActivity(intent);
+    }
+    public void StartExc() {
+        
     }
 }
