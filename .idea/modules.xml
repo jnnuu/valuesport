@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/valuesport.iml" filepath="$PROJECT_DIR$/.idea/valuesport.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/valuesport.iml" filepath="$PROJECT_DIR$/valuesport.iml" />
     </modules>
   </component>
 </project>
