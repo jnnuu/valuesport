@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -16,6 +17,15 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        WalletSingleton walletInstance = WalletSingleton.getInstance();
+
+        //walletin tiedot käyttöön esim. näin:
+        //
+        //walletInstance.setCredits(500);
+        //walletInstance.addCouponToWallet(/*tähän lisättävä kuponki*/);
+        //Log.d("debug", String.valueOf(walletInstance.getCredits()));
+
     }
 
     public void showPopup(View v) { //Menu buttonin onClick funktio, avaa pudotusvalikon
