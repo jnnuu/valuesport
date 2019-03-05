@@ -7,7 +7,7 @@ import java.util.ArrayList;
 class WalletSingleton {
     private static final WalletSingleton ourInstance = new WalletSingleton();
 
-    int credits;
+    static int credits = 1000;
     public ArrayList<Coupon> ownedCoupons;
 
 
@@ -32,7 +32,7 @@ class WalletSingleton {
         Log.d("debug", "Coupon added");
     }
 
-    public int getCredits() {
+    public static int getCredits() {
         return credits;
     }
 

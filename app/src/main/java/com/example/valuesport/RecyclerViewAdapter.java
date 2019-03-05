@@ -51,15 +51,40 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 .into(viewHolder.viewImage);
 
         viewHolder.viewTitle.setText(mCoupons.get(i).getCouponTitle());
-        viewHolder.viewPrice.setText(String.valueOf(mCoupons.get(i).getCouponPrice()) + " kredittiä");
+        if (mContext instanceof BuyCouponActivity) {
+            viewHolder.viewPrice.setText(String.valueOf(mCoupons.get(i).getCouponPrice()) + " kredittiä");
+        } else if (mContext instanceof WalletActivity) {
+            viewHolder.viewPrice.setText("");
+        }
 
 
         viewHolder.itemLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: clicked on: " + mCoupons.get(i).getCouponTitle());
-                Toast.makeText(mContext, "Item clicked", Toast.LENGTH_SHORT).show();
 
+                Log.d(TAG, "onClick: clicked on: " + mCoupons.get(i).getCouponTitle());
+                //Toast.makeText(mContext, "Item clicked", Toast.LENGTH_SHORT).show();
+                Log.d("Debug", String.valueOf(mContext));
+
+                if (mContext instanceof BuyCouponActivity) {
+                    if (WalletSingleton.getCredits() >= mCoupons.get(i).getCouponPrice()){
+                        Log.d(TAG, String.valueOf(WalletSingleton.getCredits()));
+                        walletSingleton.addCouponToWallet(mCoupons.get(i));
+                        walletSingleton.useCredits(mCoupons.get(i).getCouponPrice());
+                        Log.d(TAG, String.valueOf(WalletSingleton.getCredits()));
+                        Toast.makeText(mContext, "Item succesfully added to wallet! credits left: " + WalletSingleton.getCredits(), Toast.LENGTH_SHORT).show();
+                    } else {
+                        Log.d(TAG, "Not enough credits");
+                        Toast.makeText(mContext, "Not enough credits! You currently have: " + WalletSingleton.getCredits(), Toast.LENGTH_SHORT).show();
+                    }
+//                    Log.d(TAG, String.valueOf(WalletSingleton.getCredits()));
+//                    walletSingleton.addCouponToWallet(mCoupons.get(i));
+//                    walletSingleton.useCredits(mCoupons.get(i).getCouponPrice());
+//                    Log.d(TAG, "kauppa");
+//                    Log.d(TAG, String.valueOf(WalletSingleton.getCredits()));
+                } else if (mContext instanceof WalletActivity) {
+                    Log.d(TAG, "lompsa");
+                }
                 // tästä käyntiin activity jossa hyväksytään kupongin osto
 
 
