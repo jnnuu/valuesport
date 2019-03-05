@@ -3,6 +3,9 @@
     package="com.example.valuesport">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Permissions for user's hardware gps and fine location -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-feature android:name="android.hardware.location.gps" android:required="true"/>
 
     <application
         android:allowBackup="true"

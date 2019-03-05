@@ -11,7 +11,6 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:background="@color/darkgray"
-        android:onClick="StopExc"
         android:scaleType="fitXY"
         android:src="@drawable/stop"
         app:layout_constraintBottom_toBottomOf="parent"
