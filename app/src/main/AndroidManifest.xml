@@ -11,16 +11,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".ExerciseActivity"
-            android:label="@string/title_exercising">
+        <activity
+            android:name=".BuyDialogActivity"
+            android:label="@string/title_buydialog"
+            android:parentActivityName=".BuyCouponActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.valuesport.BuyCouponActivity" />
         </activity>
-
+        <activity
+            android:name=".ExerciseActivity"
+            android:label="@string/title_exercising"></activity>
         <activity
             android:name=".BuyCouponActivity"
-            android:parentActivityName=".MainActivity"
-            android:label="@string/title_store"/>
-
+            android:label="@string/title_store"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".WalletActivity"
             android:label="@string/title_activity_wallet"
@@ -30,10 +35,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.valuesport.MainActivity" />
         </activity>
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

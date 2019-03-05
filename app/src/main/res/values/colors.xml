@@ -5,4 +5,6 @@
     <color name="white">#ffffff</color>
     <color name="darkgray">#303030</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="buy">#74d680</color>
+    <color name="cancel">#ff7878</color>
 </resources>

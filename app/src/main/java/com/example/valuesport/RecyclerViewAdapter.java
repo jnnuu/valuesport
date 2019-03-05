@@ -1,6 +1,7 @@
 package com.example.valuesport;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -67,22 +68,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 Log.d("Debug", String.valueOf(mContext));
 
                 if (mContext instanceof BuyCouponActivity) {
-                    if (WalletSingleton.getCredits() >= mCoupons.get(i).getCouponPrice()){
-                        Log.d(TAG, String.valueOf(WalletSingleton.getCredits()));
-                        walletSingleton.addCouponToWallet(mCoupons.get(i));
-                        walletSingleton.useCredits(mCoupons.get(i).getCouponPrice());
-                        Log.d(TAG, String.valueOf(WalletSingleton.getCredits()));
-                        Toast.makeText(mContext, "Item succesfully added to wallet! credits left: " + WalletSingleton.getCredits(), Toast.LENGTH_SHORT).show();
-                    } else {
-                        Log.d(TAG, "Not enough credits");
-                        Toast.makeText(mContext, "Not enough credits! You currently have: " + WalletSingleton.getCredits(), Toast.LENGTH_SHORT).show();
-                    }
-//                    Log.d(TAG, String.valueOf(WalletSingleton.getCredits()));
-//                    walletSingleton.addCouponToWallet(mCoupons.get(i));
-//                    walletSingleton.useCredits(mCoupons.get(i).getCouponPrice());
-//                    Log.d(TAG, "kauppa");
-//                    Log.d(TAG, String.valueOf(WalletSingleton.getCredits()));
-                } else if (mContext instanceof WalletActivity) {
+
+                    Intent nextActivity = new Intent(mContext, BuyDialogActivity.class);
+                    nextActivity.putExtra("index", i);
+                    mContext.startActivity(nextActivity);
+
+                    } else if (mContext instanceof WalletActivity) {
                     Log.d(TAG, "lompsa");
                 }
                 // tästä käyntiin activity jossa hyväksytään kupongin osto
