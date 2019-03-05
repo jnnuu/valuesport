@@ -2,13 +2,11 @@ package com.example.valuesport;
 
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
 
@@ -20,7 +18,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
         WalletSingleton walletInstance = WalletSingleton.getInstance();
 
-        //walletin tiedot käyttöön esim. näin:
+        //wallet käyttöön esim. näin:
         //
         //walletInstance.setCredits(500);
         //walletInstance.addCouponToWallet(/*tähän lisättävä kuponki*/);
@@ -39,33 +37,26 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     public boolean onMenuItemClick(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.store:
-                // tähän store activity (intent intent startPsykoosit())
-               // Toast.makeText(this, "kauppaa klikattu", Toast.LENGTH_SHORT).show();
                 toStore();
                 return true;
             case R.id.wallet:
-                // tähän wallet activity (intent intent startPsykoosit())
                 toWallet();
                 return true;
-            /*case R.id.exit: //exittiä "ei ole olemassa" androidissa
-                // tähän exitti tai poista tämä case
-                Toast.makeText(this, "poistumista yritetty :D", Toast.LENGTH_SHORT).show();
-                return true;*/
-            // tähän on helppo lisätä mitä mieleen tulee. R.id.store / R.id.wallet jne resurssit löytyvät
-            // app/res/menu/mainmenu.xml
-            // ton toastin voi poistaa myöhemmin, kun nappia painamalla aukeaa uusi activity.
             default:
                 return false;
         }
     }
+
     public void toStore() {
         Intent intent = new Intent(this, BuyCouponActivity.class);
         startActivity(intent);
     }
+
     public void toWallet() {
         Intent intent = new Intent(this, WalletActivity.class);
         startActivity(intent);
     }
+
     public void StartExc(View view) {
         Intent intent = new Intent(this, ExerciseActivity.class);
         startActivity(intent);

@@ -10,7 +10,7 @@ public class Coupon {
         this.couponTitle = couponTitle;
         this.couponPrice = couponPrice;
         this.couponUsable = couponUsable;
-        this.couponImageUrl =  couponImageUrl;
+        this.couponImageUrl = couponImageUrl;
     }
 
     public String getCouponTitle() {
@@ -29,7 +29,7 @@ public class Coupon {
         return couponImageUrl;
     }
 
-    public void setCouponUsable(boolean couponUsable){
+    public void setCouponUsable(boolean couponUsable) {
         this.couponUsable = couponUsable;
     }
 }

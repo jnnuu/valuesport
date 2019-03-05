@@ -20,15 +20,16 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     private static final String TAG = "RecyclerViewAdapter";
+    WalletSingleton walletSingleton = WalletSingleton.getInstance();
 
-    private ArrayList<String> mImageNames = new ArrayList<>();
-    private ArrayList<String> mImages = new ArrayList<>();
+    private ArrayList<Coupon> mCoupons;
+
     private Context mContext;
 
-    public RecyclerViewAdapter(Context context, ArrayList<String> mImageNames, ArrayList<String> mImages) {
-        this.mImageNames = mImageNames;
-        this.mImages = mImages;
+    public RecyclerViewAdapter(Context context, ArrayList<Coupon> coupons) {
+
         this.mContext = context;
+        this.mCoupons = coupons;
     }
 
     @NonNull
@@ -43,38 +44,46 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
         Log.e(TAG, "onBindViewHolder: called");
 
+
         Glide.with(mContext)
                 .asBitmap()
-                .load(mImages.get(i))
-                .into(viewHolder.image);
+                .load(mCoupons.get(i).getCouponImageUrl())
+                .into(viewHolder.viewImage);
 
-        viewHolder.imageName.setText(mImageNames.get(i));
+        viewHolder.viewTitle.setText(mCoupons.get(i).getCouponTitle());
+        viewHolder.viewPrice.setText(String.valueOf(mCoupons.get(i).getCouponPrice()) + " kredittiä");
+
 
         viewHolder.itemLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: clicked on: " + mImageNames.get(i));
+                Log.d(TAG, "onClick: clicked on: " + mCoupons.get(i).getCouponTitle());
+                Toast.makeText(mContext, "Item clicked", Toast.LENGTH_SHORT).show();
 
-                Toast.makeText(mContext, mImageNames.get(i), Toast.LENGTH_SHORT).show();
+                // tästä käyntiin activity jossa hyväksytään kupongin osto
+
+
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return mImageNames.size();
+        return mCoupons.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        CircleImageView image;
-        TextView imageName;
+        CircleImageView viewImage;
+        TextView viewTitle;
+        TextView viewPrice;
         RelativeLayout itemLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            image = itemView.findViewById(R.id.image);
-            imageName = itemView.findViewById(R.id.image_name);
+            viewImage = itemView.findViewById(R.id.image);
+            viewTitle = itemView.findViewById(R.id.title);
+            viewPrice = itemView.findViewById(R.id.price);
             itemLayout = itemView.findViewById(R.id.item_layout);
         }
     }
