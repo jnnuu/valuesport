@@ -40,5 +40,9 @@ class WalletSingleton {
         this.credits = credits;
     }
 
+    public void useCredits(int amount) {
+        this.credits = this.credits - amount;
+    }
+
 
 }
