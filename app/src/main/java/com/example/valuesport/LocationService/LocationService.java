@@ -32,9 +32,9 @@ public class LocationService {
     public LocationService(Activity activity, Context context){
         this.mLocationManager = null;   //location manager object needed for getting the location from gps
         this.fullDistance = 0;          //full distance traveled
-        this.mContext = context;        //current context passed by MainActivity
-        this.mLastLocation = null;      //location object for storing the last known location
+        this.mContext = context;        //current context passed by current activity
         this.mActivity = activity;      //current activity passed as an argument
+        this.mLastLocation = null;      //location object for storing the last known location
     }
 
     //location listener interface and its methods
@@ -102,6 +102,7 @@ public class LocationService {
         }
         catch (SecurityException e){
             //in case of security exception i.e. permission not given, the application closes
+            //!!this shouldn't happen!!
             if (android.os.Build.VERSION.SDK_INT >= 21) {
                 Log.d(TAG, "app closes");
                 mActivity.finishAndRemoveTask();

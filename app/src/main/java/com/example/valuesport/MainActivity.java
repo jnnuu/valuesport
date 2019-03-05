@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         }
         else{
             Log.d(TAG,"permission is already granted for location");
-            StartExc(); //starting exercise activity
+            StartExc(); //starts exercise activity
         }
     }
 
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // All good!
                     Log.d(TAG, "You gave permission to location");
-                    StartExc();     //starting exercise activity
+                    StartExc();     //starts exercise activity
                 }
                 else {
                     //create a dialog box that informs user that the application need their permission for
@@ -129,4 +129,8 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         Intent intent = new Intent(this, ExerciseActivity.class);
         startActivity(intent);
     }
+    /**
+     * Methods related to location permissions end here
+     */
+
 }
