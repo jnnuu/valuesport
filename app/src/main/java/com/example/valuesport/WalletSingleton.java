@@ -10,7 +10,6 @@ class WalletSingleton {
     static int credits = 1000;
     public static ArrayList<Coupon> ownedCoupons;
 
-
     static WalletSingleton getInstance() {
         return ourInstance;
     }
@@ -25,6 +24,10 @@ class WalletSingleton {
 
     public ArrayList<Coupon> getOwnedCoupons() {
         return ownedCoupons;
+    }
+
+    public static void setOwnedCoupons(ArrayList<Coupon> ownedCoupons) {
+        WalletSingleton.ownedCoupons = ownedCoupons;
     }
 
     public void addCouponToWallet(Coupon coupon) {

@@ -1,5 +1,7 @@
 package com.example.valuesport;
 
+import android.app.SharedElementCallback;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,8 +10,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -20,8 +22,24 @@ public class BuyDialogActivity extends AppCompatActivity {
 
     static StoreContentSingleton storeContentSingleton = StoreContentSingleton.getInstance();
     static WalletSingleton walletSingleton = WalletSingleton.getInstance();
-
     int i;
+
+    private void saveData() {
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(WalletSingleton.ownedCoupons);
+        editor.putString("coupons", json);
+        editor.apply();
+        Log.d("debug", "Data SAVED!");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("debug", "onPause() called");
+        saveData();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +71,11 @@ public class BuyDialogActivity extends AppCompatActivity {
             walletSingleton.useCredits(storeContentSingleton.getCoupon(i).getCouponPrice());
             Log.d("osto", String.valueOf(WalletSingleton.getCredits()));
             Toast.makeText(this, "Item succesfully added to wallet! credits left: " + WalletSingleton.getCredits(), Toast.LENGTH_SHORT).show();
+
         } else {
             Log.d("osto", "Not enough credits");
             Toast.makeText(this, "Not enough credits! You currently have: " + WalletSingleton.getCredits(), Toast.LENGTH_SHORT).show();
         }
     }
-
 
 }

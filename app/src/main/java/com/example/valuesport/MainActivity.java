@@ -4,6 +4,7 @@ package com.example.valuesport;
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,12 +15,18 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
 import android.util.Log;
+import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.valuesport.LocationService.LocationService;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
@@ -32,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     //start/stop imageButton and flag for checking if exercise in on
     ImageButton startButton;
     boolean isExerciseOn = false;
+    static boolean isStartedBefore;
 
     //variables, constants and objects used for location and timer purposes
     private LocationService mLocationService;
@@ -61,8 +69,12 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //Log.d("debug", "onCreate() called");
         WalletSingleton walletInstance = WalletSingleton.getInstance();
+        if (isStartedBefore == false) {
+            loadData();
+        }
+
 
         //wallet käyttöön esim. näin:
         //
@@ -213,6 +225,33 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             }
         }
     }
+
+    private void loadData() {
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("coupons", null);
+        Type type = new TypeToken<ArrayList<Coupon>>() {}.getType();
+        WalletSingleton walletSingleton = WalletSingleton.getInstance();
+        ArrayList<Coupon> temp = new ArrayList<>();
+        if (gson.fromJson(json, type) == null) {
+            walletSingleton.setOwnedCoupons(temp);
+            Log.d("debug", "no data at preferences");
+        } else {
+            temp = gson.fromJson(json, type);
+            walletSingleton.setOwnedCoupons(temp);
+            Log.d("debug", "data loaded");
+        }
+
+        isStartedBefore = true;
+    }
+
+
+    /*
+    //starts exercise activity
+    public void StartExc() {
+        Intent intent = new Intent(this, ExerciseActivity.class);
+        startActivity(intent);
+    }*/
 
     /*
      * Methods related to location permissions end here
