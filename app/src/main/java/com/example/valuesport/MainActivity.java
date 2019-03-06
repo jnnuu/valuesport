@@ -4,6 +4,7 @@ package com.example.valuesport;
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,9 +14,15 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
 import android.util.Log;
+import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
@@ -29,13 +36,18 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     //start/stop imagebutton and flag for checking if exercise in on
     ImageButton startButton;
     boolean isExerciseOn = false;
+    static boolean isStartedBefore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Log.d("debug", "onCreate() called");
         WalletSingleton walletInstance = WalletSingleton.getInstance();
+        if (isStartedBefore == false) {
+            loadData();
+        }
+
 
         //wallet käyttöön esim. näin:
         //
@@ -151,6 +163,40 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             }
         }
     }
+
+    private void saveData() {
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(WalletSingleton.ownedCoupons);
+        editor.putString("coupons", json);
+        editor.apply();
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("debug", "onPause() called");
+        saveData();
+    }
+
+    private void loadData() {
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("coupon", null);
+        Type type = new TypeToken<ArrayList<Coupon>>() {}.getType();
+        WalletSingleton walletSingleton = WalletSingleton.getInstance();
+        ArrayList<Coupon> temp = new ArrayList<>();
+        if (gson.fromJson(json, type) == null) {
+            walletSingleton.setOwnedCoupons(temp);
+        } else {
+            temp = gson.fromJson(json, type);
+            walletSingleton.setOwnedCoupons(temp);
+        }
+        Log.d("debug", "data loaded");
+        isStartedBefore = true;
+    }
+
+
     /*
     //starts exercise activity
     public void StartExc() {
