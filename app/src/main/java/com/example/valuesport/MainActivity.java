@@ -15,6 +15,7 @@ import android.support.v7.widget.PopupMenu;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 
 
 public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
@@ -24,6 +25,10 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     */
     private static final String TAG = "TESTGPS";                       //TAG for log debug entries
     public static final int MY_PERMISSION_ACCESS_FINE_LOCATION = 1;    //my permission for fine location
+
+    //start/stop imagebutton and flag for checking if exercise in on
+    ImageButton startButton;
+    boolean isExerciseOn = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +43,28 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         //walletInstance.addCouponToWallet(/*tähän lisättävä kuponki*/);
         //Log.d("debug", String.valueOf(walletInstance.getCredits()));
 
+        /*
+            Setting up imageButton and onclick listener
+         */
+            startButton = (ImageButton)findViewById(R.id.startButton);
+            startButton.setImageResource(R.drawable.start);
+
+            startButton.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View viewButton) {
+                    ImageButton startButton = (ImageButton) viewButton;
+
+                    if(!isExerciseOn){
+                        startButton.setImageResource(R.drawable.stop);
+                        isExerciseOn = true;
+                    }
+                    else{
+                        startButton.setImageResource(R.drawable.start);
+                        isExerciseOn = false;
+                    }
+
+                }
+            });
     }
 
     public void showPopup(View v) { //Menu buttonin onClick funktio, avaa pudotusvalikon
@@ -71,12 +98,12 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         startActivity(intent);
     }
 
-    /**
+    /*
      * This following section of the code contains the methods needed for handling permission cases
      * It also defines a dialogue box to communicate the purpose of location to the user
      */
      //Method for asking permission for location if needed and starts next activity if not
-    public void checkPermission(View view){
+    public void checkPermission(){
         //Checks if the application has permission for fine location
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -84,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         }
         else{
             Log.d(TAG,"permission is already granted for location");
-            StartExc(); //starts exercise activity
+            //StartExc(); //starts exercise activity
         }
     }
 
@@ -106,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // All good!
                     Log.d(TAG, "You gave permission to location");
-                    StartExc();     //starts exercise activity
+                    //StartExc();     //starts exercise activity
                 }
                 else {
                     //create a dialog box that informs user that the application need their permission for
@@ -124,12 +151,14 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             }
         }
     }
+    /*
     //starts exercise activity
     public void StartExc() {
         Intent intent = new Intent(this, ExerciseActivity.class);
         startActivity(intent);
-    }
-    /**
+    }*/
+
+    /*
      * Methods related to location permissions end here
      */
 
