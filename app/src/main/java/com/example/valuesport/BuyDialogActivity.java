@@ -76,6 +76,8 @@ public class BuyDialogActivity extends AppCompatActivity {
             Log.d("osto", "Not enough credits");
             Toast.makeText(this, "Not enough credits! You currently have: " + WalletSingleton.getCredits(), Toast.LENGTH_SHORT).show();
         }
+
+        saveData();
     }
 
 }
