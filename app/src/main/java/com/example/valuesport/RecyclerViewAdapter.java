@@ -74,7 +74,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     mContext.startActivity(nextActivity);
 
                     } else if (mContext instanceof WalletActivity) {
-                    Log.d(TAG, "lompsa");
+                    Intent nextActivity = new Intent(mContext, UseCouponActivity.class);
+                    nextActivity.putExtra("index", i);
+                    mContext.startActivity(nextActivity);
                 }
                 // tästä käyntiin activity jossa hyväksytään kupongin osto
 

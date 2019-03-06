@@ -8,7 +8,7 @@ class WalletSingleton {
     private static final WalletSingleton ourInstance = new WalletSingleton();
 
     static int credits = 1000;
-    public ArrayList<Coupon> ownedCoupons;
+    public static ArrayList<Coupon> ownedCoupons;
 
 
     static WalletSingleton getInstance() {
@@ -34,6 +34,10 @@ class WalletSingleton {
 
     public static int getCredits() {
         return credits;
+    }
+
+    public static void removeCoupon(int i) {
+        ownedCoupons.remove(i);
     }
 
     public void setCredits(int credits) {
