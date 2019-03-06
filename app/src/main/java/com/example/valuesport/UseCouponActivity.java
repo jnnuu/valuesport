@@ -1,17 +1,37 @@
 package com.example.valuesport;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 
 public class UseCouponActivity extends AppCompatActivity {
     static WalletSingleton walletSingleton = WalletSingleton.getInstance();
     int i;
+
+    private void saveData() {
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(WalletSingleton.ownedCoupons);
+        editor.putString("coupons", json);
+        editor.apply();
+        Log.d("debug", "Data SAVED!");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("debug", "onPause() called");
+        saveData();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
