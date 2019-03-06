@@ -2,10 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.valuesport">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <!-- Permissions for user's hardware gps and fine location -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- Permissions for user's hardware gps and fine location -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-feature android:name="android.hardware.location.gps" android:required="true"/>
+
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -14,6 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".UseCouponActivity"></activity>
         <activity
             android:name=".BuyDialogActivity"
             android:label="@string/title_buydialog"
@@ -24,7 +27,7 @@
         </activity>
         <activity
             android:name=".ExerciseActivity"
-            android:label="@string/title_exercising"></activity>
+            android:label="@string/title_exercising" />
         <activity
             android:name=".BuyCouponActivity"
             android:label="@string/title_store"
