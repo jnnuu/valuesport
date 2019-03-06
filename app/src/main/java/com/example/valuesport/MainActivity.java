@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -20,6 +21,9 @@ import com.google.gson.reflect.TypeToken;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
+
+import com.example.valuesport.LocationService.LocationService;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -27,16 +31,39 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
 
-    /*
-        variables, constants ans objects used for location purposes
-    */
+
+    //constants used for location purposes
     private static final String TAG = "TESTGPS";                       //TAG for log debug entries
     public static final int MY_PERMISSION_ACCESS_FINE_LOCATION = 1;    //my permission for fine location
 
-    //start/stop imagebutton and flag for checking if exercise in on
+    //start/stop imageButton and flag for checking if exercise in on
     ImageButton startButton;
     boolean isExerciseOn = false;
     static boolean isStartedBefore;
+
+    //variables, constants and objects used for location and timer purposes
+    private LocationService mLocationService;
+    TextView distanceView;
+    TextView timerView;
+    long startTime = 0;
+
+    //creates timer for app
+    Handler timerHandler = new Handler();
+    Runnable timerRunnable = new Runnable() {
+        @Override
+        public void run() {
+            long millis = System.currentTimeMillis() - startTime;
+            int seconds = (int)(millis / 1000);
+            int minutes = seconds / 60;
+            int hours = minutes / 60;
+            seconds = seconds % 60;
+
+            //sets time and distance traveled into the views
+            distanceView.setText(String.format("%1$4.0f", mLocationService.getfullDistance()));
+            timerView.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
+            timerHandler.postDelayed(this, 500);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,28 +82,50 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         //walletInstance.addCouponToWallet(/*tähän lisättävä kuponki*/);
         //Log.d("debug", String.valueOf(walletInstance.getCredits()));
 
+
         /*
-            Setting up imageButton and onclick listener
+         * Following code creates LocationService instance, creates timer for the exercise,
+         * and sets up needed views and image button to start and track exercise
          */
-            startButton = (ImageButton)findViewById(R.id.startButton);
-            startButton.setImageResource(R.drawable.start);
+        //creating instance of LocationService
+        mLocationService = new LocationService(this, this);
 
-            startButton.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View viewButton) {
-                    ImageButton startButton = (ImageButton) viewButton;
+        //sets up views
+        timerView = (TextView)findViewById(R.id.timerView);
+        distanceView = (TextView)findViewById(R.id.distanceView);
 
-                    if(!isExerciseOn){
-                        startButton.setImageResource(R.drawable.stop);
-                        isExerciseOn = true;
-                    }
-                    else{
-                        startButton.setImageResource(R.drawable.start);
-                        isExerciseOn = false;
-                    }
+        //Sets up imageButton and onclick listener
+        startButton = (ImageButton)findViewById(R.id.startButton);
+        startButton.setImageResource(R.drawable.start);
 
+        startButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View viewButton) {
+                ImageButton startButton = (ImageButton) viewButton;
+
+                if(!isExerciseOn){
+                    //starting exercise
+                    //checks permission for location
+                    checkPermission();
+                    //exercise is only starts if user has/gives permission for location
                 }
-            });
+                else{
+                    //exercise ending
+                    //removing timer callbacks and location listening
+                    //sets flag for exercise to be off
+                    startButton.setImageResource(R.drawable.start);
+                    timerHandler.removeCallbacks(timerRunnable);
+                    startTime = 0;
+                    mLocationService.stopListeningLoc();
+                    isExerciseOn = false;
+                }
+            }
+        });
+
+        /*
+        Set up for location, timer and related views and button ends here
+        -------------------------
+         */
     }
 
     public void showPopup(View v) { //Menu buttonin onClick funktio, avaa pudotusvalikon
@@ -123,7 +172,13 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         }
         else{
             Log.d(TAG,"permission is already granted for location");
-            //StartExc(); //starts exercise activity
+            //if permission is already granted, the button image will be set to stop
+            //and exercise is deemed on
+            startButton.setImageResource(R.drawable.stop);
+            timerHandler.postDelayed(timerRunnable, 0);
+            mLocationService.startListeningLoc();
+            startTime = System.currentTimeMillis();
+            isExerciseOn = true;
         }
     }
 
@@ -145,7 +200,14 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // All good!
                     Log.d(TAG, "You gave permission to location");
-                    //StartExc();     //starts exercise activity
+                    //if permission is granted, the button image will be set to stop
+                    //and exercise is deemed on
+                    //listening location and timer start
+                    startButton.setImageResource(R.drawable.stop);
+                    timerHandler.postDelayed(timerRunnable, 0);
+                    mLocationService.startListeningLoc();
+                    startTime = System.currentTimeMillis();
+                    isExerciseOn = true;
                 }
                 else {
                     //create a dialog box that informs user that the application need their permission for

@@ -13,7 +13,7 @@ import com.example.valuesport.LocationService.LocationService;
 public class ExerciseActivity extends AppCompatActivity {
 
     /*
-        variables, constants ans objects used for location purposes
+        variables, constants ans objects used for location and timer purposes
     */
     private LocationService mLocationService;
     TextView distanceView;
