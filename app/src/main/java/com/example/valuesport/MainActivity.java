@@ -17,7 +17,6 @@ import android.support.v7.widget.PopupMenu;
 import android.util.Log;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
-
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -73,8 +72,12 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         WalletSingleton walletInstance = WalletSingleton.getInstance();
         if (isStartedBefore == false) {
             loadData();
+            loadCredits();
         }
-
+        final int creditit = WalletSingleton.getCredits();
+        Log.d("debug", "");
+        final TextView credits = findViewById(R.id.credits);
+        credits.setText(String.valueOf(creditit));
 
         //wallet käyttöön esim. näin:
         //
@@ -110,6 +113,8 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                     //exercise is only starts if user has/gives permission for location
                 }
                 else{
+                    grantCredits();
+                    saveCredits();
                     //exercise ending
                     //removing timer callbacks and location listening
                     //sets flag for exercise to be off
@@ -135,6 +140,16 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         popup.show();
     }
 
+    public void grantCredits() {
+        float matka = mLocationService.getfullDistance();
+        int matkaInt = (Math.round(matka)) / 10;
+        Log.d("debug", String.valueOf(matka));
+        WalletSingleton.credits = WalletSingleton.credits + matkaInt;
+        Log.d("Debug", String.valueOf(WalletSingleton.credits));
+        TextView credits = findViewById(R.id.credits);
+        credits.setText(String.valueOf(WalletSingleton.getCredits()));
+    }
+
     @Override
     public boolean onMenuItemClick(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
@@ -143,6 +158,8 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 return true;
             case R.id.wallet:
                 toWallet();
+                return true;
+            case R.id.exit:
                 return true;
             default:
                 return false;
@@ -243,6 +260,35 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         }
 
         isStartedBefore = true;
+    }
+    private void loadCredits() {
+        SharedPreferences sharedPreferences = getSharedPreferences("credit preferences", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("credits", null);
+        Type type = new TypeToken<ArrayList<String>>() {}.getType();
+        WalletSingleton walletSingleton = WalletSingleton.getInstance();
+        ArrayList<String> temp = new ArrayList<>();
+        if (json == null) {
+            walletSingleton.setCredits(1);
+            Log.d("debug", "no credits at preferences");
+        } else {
+            //temp = gson.fromJson(json, type);
+            walletSingleton.setCredits(Integer.parseInt(json));
+            Log.d("debug", "credits loaded");
+        }
+
+        isStartedBefore = true;
+    }
+
+    private void saveCredits() {
+        SharedPreferences sharedPreferences = getSharedPreferences("credit preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String jsonc = String.valueOf(WalletSingleton.getCredits());
+        Log.d("debug", jsonc);
+        editor.putString("credits", jsonc);
+        editor.apply();
+        Log.d("debug", "Credits SAVED!");
     }
 
 

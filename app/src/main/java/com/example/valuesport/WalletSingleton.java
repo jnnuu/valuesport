@@ -7,7 +7,7 @@ import java.util.ArrayList;
 class WalletSingleton {
     private static final WalletSingleton ourInstance = new WalletSingleton();
 
-    static int credits = 1000;
+    static int credits;
     public static ArrayList<Coupon> ownedCoupons;
 
     static WalletSingleton getInstance() {
