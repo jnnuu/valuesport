@@ -34,11 +34,24 @@ public class BuyDialogActivity extends AppCompatActivity {
         Log.d("debug", "Data SAVED!");
     }
 
+    private void saveCredits() {
+        Log.d("debug", "meneekö ikinä tänne");
+        SharedPreferences sharedPreferences = getSharedPreferences("credit preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String jsonc = String.valueOf(WalletSingleton.getCredits());
+        Log.d("debug", jsonc);
+        editor.putString("credits", jsonc);
+        editor.apply();
+        Log.d("debug", "Credits SAVED!");
+    }
+
     @Override
     protected void onPause() {
         super.onPause();
         Log.d("debug", "onPause() called");
         saveData();
+        saveCredits();
     }
 
     @Override
