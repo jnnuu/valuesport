@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
 
     //constants used for location purposes
-    private static final String TAG = "TESTGPS";                       //TAG for log debug entries
+    private static final String TAG = "Permission";                       //TAG for log debug entries
     public static final int MY_PERMISSION_ACCESS_FINE_LOCATION = 1;    //my permission for fine location
 
     //start/stop imageButton and flag for checking if exercise in on
@@ -289,13 +289,6 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
 
 
-    /*
-    //starts exercise activity
-    public void StartExc() {
-        Intent intent = new Intent(this, ExerciseActivity.class);
-        startActivity(intent);
-    }*/
-  
     /*
      * Methods related to location permissions end here
      */

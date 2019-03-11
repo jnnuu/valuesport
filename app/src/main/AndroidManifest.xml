@@ -26,9 +26,6 @@
                 android:value="com.example.valuesport.BuyCouponActivity" />
         </activity>
         <activity
-            android:name=".ExerciseActivity"
-            android:label="@string/title_exercising" />
-        <activity
             android:name=".BuyCouponActivity"
             android:label="@string/title_store"
             android:parentActivityName=".MainActivity" />
