@@ -8,7 +8,7 @@ class WalletSingleton {
     private static final WalletSingleton ourInstance = new WalletSingleton();
 
     static int credits;
-    public static ArrayList<Coupon> ownedCoupons;
+    static ArrayList<Coupon> ownedCoupons;
 
     static WalletSingleton getInstance() {
         return ourInstance;
@@ -18,36 +18,36 @@ class WalletSingleton {
         ownedCoupons = new ArrayList<>();
     }
 
-    public static WalletSingleton getOurInstance() {
+    public WalletSingleton getOurInstance() {
         return ourInstance;
     }
 
-    public ArrayList<Coupon> getOwnedCoupons() {
+    ArrayList<Coupon> getOwnedCoupons() {
         return ownedCoupons;
     }
 
-    public static void setOwnedCoupons(ArrayList<Coupon> ownedCoupons) {
+    void setOwnedCoupons(ArrayList<Coupon> ownedCoupons) {
         WalletSingleton.ownedCoupons = ownedCoupons;
     }
 
-    public void addCouponToWallet(Coupon coupon) {
+    void addCouponToWallet(Coupon coupon) {
         ownedCoupons.add(coupon);
         Log.d("debug", "Coupon added");
     }
 
-    public static int getCredits() {
+    static int getCredits() {
         return credits;
     }
 
-    public static void removeCoupon(int i) {
+    static void removeCoupon(int i) {
         ownedCoupons.remove(i);
     }
 
-    public void setCredits(int credits) {
+    void setCredits(int credits) {
         this.credits = credits;
     }
 
-    public void useCredits(int amount) {
+    void useCredits(int amount) {
         this.credits = this.credits - amount;
     }
 
