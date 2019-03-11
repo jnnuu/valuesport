@@ -51,7 +51,6 @@ public class BuyDialogActivity extends AppCompatActivity {
         super.onPause();
         Log.d("debug", "onPause() called");
         saveData();
-        saveCredits();
     }
 
     @Override
@@ -90,6 +89,7 @@ public class BuyDialogActivity extends AppCompatActivity {
             Toast.makeText(this, "Not enough credits! You currently have: " + WalletSingleton.getCredits(), Toast.LENGTH_SHORT).show();
         }
 
+        saveCredits();
         saveData();
     }
 

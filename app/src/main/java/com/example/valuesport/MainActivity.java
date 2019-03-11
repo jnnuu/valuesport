@@ -107,11 +107,9 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                     //checks permission for location
                     checkPermission();
                     //exercise is only starts if user has/gives permission for location
-                }
-                else{
+                } else {
                     grantCredits();
                     saveCredits();
-                } else {
                     //exercise ending
                     //removing timer callbacks and location listening
                     //sets flag for exercise to be off
@@ -120,7 +118,9 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                     startTime = 0;
                     mLocationService.stopListeningLoc();
                     isExerciseOn = false;
+
                 }
+
             }
         });
 
@@ -257,24 +257,6 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         }
     }
 
-    private void loadData() {
-        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = sharedPreferences.getString("coupons", null);
-        Type type = new TypeToken<ArrayList<Coupon>>() {}.getType();
-        WalletSingleton walletSingleton = WalletSingleton.getInstance();
-        ArrayList<Coupon> temp = new ArrayList<>();
-        if (gson.fromJson(json, type) == null) {
-            walletSingleton.setOwnedCoupons(temp);
-            Log.d("debug", "no data at preferences");
-        } else {
-            temp = gson.fromJson(json, type);
-            walletSingleton.setOwnedCoupons(temp);
-            Log.d("debug", "data loaded");
-        }
-
-        isStartedBefore = true;
-    }
     private void loadCredits() {
         SharedPreferences sharedPreferences = getSharedPreferences("credit preferences", MODE_PRIVATE);
         Gson gson = new Gson();
@@ -298,7 +280,8 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         SharedPreferences sharedPreferences = getSharedPreferences("credit preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
-        String jsonc = String.valueOf(WalletSingleton.getCredits());
+        WalletSingleton walletSingleton = WalletSingleton.getInstance();
+        String jsonc = String.valueOf(walletSingleton.getCredits());
         Log.d("debug", jsonc);
         editor.putString("credits", jsonc);
         editor.apply();
