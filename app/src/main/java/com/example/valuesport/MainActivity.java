@@ -47,10 +47,11 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     TextView distanceView;
     TextView timerView;
     long startTime = 0;
+    String distFormatted;
 
     //creates timer for app
     Handler timerHandler = new Handler();
-    Runnable timerRunnable = new Runnable() {
+    final Runnable timerRunnable = new Runnable() {
         @Override
         public void run() {
             long millis = System.currentTimeMillis() - startTime;
@@ -60,8 +61,18 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             seconds = seconds % 60;
 
             //sets time and distance traveled into the views
-            distanceView.setText(String.format("%1$4.0f", mLocationService.getfullDistance()));
+            if(mLocationService.getfullDistance() < 1000){
+                distFormatted = String.format("%1$4.0f m", mLocationService.getfullDistance());
+            }
+            else{
+                float num1 = mLocationService.getfullDistance() / 1000;
+                distFormatted = String.format("%1$4.2f km", num1);
+            }
+
+            distanceView.setText(distFormatted);
             timerView.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
+
+
             timerHandler.postDelayed(this, 500);
         }
     };
