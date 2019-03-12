@@ -20,7 +20,8 @@
         <activity
             android:name=".BuyDialogActivity"
             android:label="@string/title_buydialog"
-            android:parentActivityName=".BuyCouponActivity">
+            android:parentActivityName=".BuyCouponActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.valuesport.BuyCouponActivity" />
