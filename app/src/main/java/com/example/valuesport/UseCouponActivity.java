@@ -13,8 +13,8 @@ import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 
 public class UseCouponActivity extends AppCompatActivity {
-    static WalletSingleton walletSingleton = WalletSingleton.getInstance();
-    int i;
+    private static WalletSingleton walletSingleton = WalletSingleton.getInstance();
+    private int i;
 
     private void saveData() {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);

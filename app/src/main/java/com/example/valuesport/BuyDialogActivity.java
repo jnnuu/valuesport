@@ -20,9 +20,9 @@ import static com.example.valuesport.R.id.image;
 
 public class BuyDialogActivity extends AppCompatActivity {
 
-    static StoreContentSingleton storeContentSingleton = StoreContentSingleton.getInstance();
-    static WalletSingleton walletSingleton = WalletSingleton.getInstance();
-    int i;
+    private static StoreContentSingleton storeContentSingleton = StoreContentSingleton.getInstance();
+    private static WalletSingleton walletSingleton = WalletSingleton.getInstance();
+    private int i;
 
     private void saveData() {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);

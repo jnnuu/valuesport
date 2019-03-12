@@ -31,7 +31,6 @@ public class LocationService {
 
     private float fullDistance;
     private Location mLastLocation;     //location object to store the information on the latest location
-    private boolean gpsEnabled = false; //flag for checking the gps status
 
     /**
      * Defines starting values for LocationManager object, full distance and Last location.
@@ -90,7 +89,8 @@ public class LocationService {
             Log.d(TAG,"LocationManager initialized");
         }
 
-        gpsEnabled = mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        //flag for checking the gps status
+        boolean gpsEnabled = mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         //tells user to enable location
         if(!gpsEnabled){
             Toast.makeText(mContext, "Enable location", Toast.LENGTH_LONG).show();

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 /**
  *
- * Singleton class
+ * Singleton class which holds credits and coupons of users.
  * @author Jesse Väärälä
  */
 class WalletSingleton {

@@ -3,6 +3,8 @@ package com.example.valuesport;
 import java.util.ArrayList;
 
 /**
+ *
+ * Singleton class to hold placeholder content of store items.
  * @author Jesse Väärälä
  */
 class StoreContentSingleton {
@@ -43,10 +45,14 @@ class StoreContentSingleton {
 
     private ArrayList<Coupon> coupons;
 
+    /**
+     *
+     */
     private StoreContentSingleton() {
         coupons = new ArrayList<>();
 
 
+        // Add placeholder coupons to ArrayList coupons
         coupons.add(new Coupon("makkarat -50% lähikaupasta", 150,"https://pbs.twimg.com/profile_images/2725100467/41c75598637053c11b75c05d8309650f_400x400.png"));
         coupons.add(new Coupon("Euron juusto hesasta", 250,"https://is2-ssl.mzstatic.com/image/thumb/Purple124/v4/3b/16/77/3b167783-02ca-629f-fb43-3284013e4fe6/source/256x256bb.jpg"));
         coupons.add(new Coupon("Euron juusto hesasta", 250,"https://is2-ssl.mzstatic.com/image/thumb/Purple124/v4/3b/16/77/3b167783-02ca-629f-fb43-3284013e4fe6/source/256x256bb.jpg"));

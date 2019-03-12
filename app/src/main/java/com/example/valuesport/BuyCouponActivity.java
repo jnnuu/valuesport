@@ -9,7 +9,7 @@ import android.util.Log;
 public class BuyCouponActivity extends AppCompatActivity {
 
     private static final String TAG = "BuyCouponActivity";
-    static StoreContentSingleton storeContentSingleton = StoreContentSingleton.getInstance();
+    private static StoreContentSingleton storeContentSingleton = StoreContentSingleton.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

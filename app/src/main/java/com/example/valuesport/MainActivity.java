@@ -35,23 +35,23 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
     //constants used for location purposes
     private static final String TAG = "Permission";                       //TAG for log debug entries
-    public static final int MY_PERMISSION_ACCESS_FINE_LOCATION = 1;    //my permission for fine location
+    private static final int MY_PERMISSION_ACCESS_FINE_LOCATION = 1;    //my permission for fine location
 
     //start/stop imageButton and flag for checking if exercise in on
-    ImageButton startButton;
-    boolean isExerciseOn = false;
-    static boolean isStartedBefore;
+    private ImageButton startButton;
+    private boolean isExerciseOn = false;
+    private static boolean isStartedBefore;
 
     //variables, constants and objects used for location and timer purposes
     private LocationService mLocationService;
-    TextView distanceView;
-    TextView timerView;
-    long startTime = 0;
-    String distFormatted;
+    private TextView distanceView;
+    private TextView timerView;
+    private long startTime = 0;
+    private String distFormatted;
 
     //creates timer for app
-    Handler timerHandler = new Handler();
-    final Runnable timerRunnable = new Runnable() {
+    private Handler timerHandler = new Handler();
+    private final Runnable timerRunnable = new Runnable() {
         @Override
         public void run() {
             long millis = System.currentTimeMillis() - startTime;
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         setContentView(R.layout.activity_main);
         //Log.d("debug", "onCreate() called");
         WalletSingleton walletInstance = WalletSingleton.getInstance();
-        if (isStartedBefore == false) {
+        if (!isStartedBefore) {
             loadData();
             loadCredits();
         }
@@ -175,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 /**
 * Grants credits based on the distance traveled and divided by 10.
 */
-    public void grantCredits() {
+private void grantCredits() {
         float matka = mLocationService.getfullDistance();
         int matkaInt = (Math.round(matka)) / 10;
         Log.d("debug", String.valueOf(matka));
@@ -203,14 +203,14 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 /**
 * Starts BuyCouponActivity
 */
-    public void toStore() {
+private void toStore() {
         Intent intent = new Intent(this, BuyCouponActivity.class);
         startActivity(intent);
     }
 /**
 * Starts WalletActivity
 */
-    public void toWallet() {
+private void toWallet() {
         Intent intent = new Intent(this, WalletActivity.class);
         startActivity(intent);
     }
@@ -227,7 +227,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
      */
 
     //Method for asking permission for location if needed
-    public void checkPermission() {
+    private void checkPermission() {
         //Checks if the application has permission for fine location
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
