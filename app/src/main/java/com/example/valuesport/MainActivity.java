@@ -204,10 +204,17 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
 
     /*
-     * This following section of the code contains the methods needed for handling permission cases
-     * It also defines a dialogue box to communicate the purpose of location to the user
+     This following section of the code contains the methods needed for handling permission cases
+     It also defines a dialogue box to communicate the purpose of location to the user
      */
-    //Method for asking permission for location if needed and starts next activity if not
+
+    /**
+     * Checks user permission for using the fine location service. If permission is granted,
+     * exercise timer and location listening using LocationService starts. If permission is not already granted,
+     * permission is asked from the user.
+     */
+
+    //Method for asking permission for location if needed
     public void checkPermission() {
         //Checks if the application has permission for fine location
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -267,6 +274,10 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             }
         }
     }
+    /*
+     * Methods related to location permissions end here
+     */
+
 
     private void loadCredits() {
         SharedPreferences sharedPreferences = getSharedPreferences("credit preferences", MODE_PRIVATE);
@@ -298,10 +309,5 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         editor.apply();
         Log.d("debug", "Credits SAVED!");
     }
-
-
-    /*
-     * Methods related to location permissions end here
-     */
 
 }

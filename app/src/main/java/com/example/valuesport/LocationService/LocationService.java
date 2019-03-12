@@ -10,9 +10,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-//Location service is a custom class meant to provide the logic
-// for using the location provider and services
-//made by Arttu Seuna
+
+/**
+ * LocationService is the class for allowing user to access location through Global Positioning System.
+ *
+ *
+ * @author Arttu Seuna
+ */
 
 public class LocationService {
 
@@ -28,6 +32,13 @@ public class LocationService {
     private float fullDistance;
     private Location mLastLocation;     //location object to store the information on the latest location
     private boolean gpsEnabled = false; //flag for checking the gps status
+
+    /**
+     * Defines starting values for LocationManager object, full distance and Last location.
+     * They are set to null and zero until values are given in corresponding methods.
+     * @param activity activity needed for context
+     * @param context current context to be used with LocationManager and toast widget
+     */
 
     public LocationService(Activity activity, Context context){
         this.mLocationManager = null;   //location manager object needed for getting the location from gps
@@ -69,7 +80,9 @@ public class LocationService {
     };
 
 
-    //Method to initialize Location Manager
+    /**
+     * Initializes LocationManager object that is used in getting the location from LocationListener.
+     */
     private void initializeLocationManager(){
         if (mLocationManager == null){
             Log.d(TAG, "Initializing LocationManager");
@@ -77,13 +90,7 @@ public class LocationService {
             Log.d(TAG,"LocationManager initialized");
         }
 
-        //try-catch to check if gps is enabled
-        try {
-            gpsEnabled = mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        }catch(Exception ex){
-            Log.d(TAG, "Exception happened!");
-        }
-
+        gpsEnabled = mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         //tells user to enable location
         if(!gpsEnabled){
             Toast.makeText(mContext, "Enable location", Toast.LENGTH_LONG).show();
@@ -91,7 +98,12 @@ public class LocationService {
 
     }
 
-    //method for starting location updates
+    /**
+     * Calls initialization of LocationManager. Starts to listen location updates using LocationManager
+     * and LocationListener.
+     *
+     * @throws SecurityException if permission has not been granted for listening location updates.
+     */
     public void startListeningLoc(){
 
         initializeLocationManager();
@@ -101,7 +113,7 @@ public class LocationService {
             Log.d(TAG,"listening to location");
         }
         catch (SecurityException e){
-            //in case of security exception i.e. permission not given, the application closes
+            //in case of security exception, permission not given, the application closes
             //!!this shouldn't happen!!
             if (android.os.Build.VERSION.SDK_INT >= 21) {
                 Log.d(TAG, "app closes");
@@ -113,40 +125,24 @@ public class LocationService {
         }
     }
 
-    //method for stopping listening for location updates
+    /**
+     * Stops location updates. Sets LocationManager and location to null and traveled distance to 0.
+     *
+     */
     public void stopListeningLoc(){
-        try{
-            mLocationManager.removeUpdates(mLocationListener);  //removes the updates on the location listener
-            mLocationManager = null;                            //sets location manager to null
-            mLastLocation = null;                               //sets last location to null
-            fullDistance = 0;                                   //sets fullDistance to 0
-        }
-        catch (Exception e){
-            Log.d(TAG, "Exception occurred, removing location updates failed");
-        }
+        Log.d(TAG,"stopping location listening");
+        mLocationManager.removeUpdates(mLocationListener);  //removes the updates on the location listener
+        mLocationManager = null;                            //sets location manager to null
+        mLastLocation = null;                               //sets last location to null
+        fullDistance = 0;                                   //sets fullDistance to 0
     }
 
 
-    //methods to get position and full distance traveled
+    /**
+     * Returns full distance the user has traveled
+     * @return <code>fullDistance</code> the added up distance the user has traveled
+     */
     public float getfullDistance(){
         return this.fullDistance;
-    }
-
-    public double getLat(){
-        if(mLastLocation != null){
-            return mLastLocation.getLatitude();
-        }
-        else {
-            return 0;
-        }
-    }
-
-    public double getLong(){
-        if(mLastLocation != null) {
-            return mLastLocation.getLongitude();
-        }
-        else{
-            return 0;
-        }
     }
 }
