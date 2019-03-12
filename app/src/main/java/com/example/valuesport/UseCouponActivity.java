@@ -75,5 +75,7 @@ public class UseCouponActivity extends AppCompatActivity {
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
         finish();
+        Intent Intent = new Intent(this, WalletActivity.class);
+        startActivity(Intent);
     }
 }
