@@ -21,7 +21,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     private static final String TAG = "RecyclerViewAdapter";
-    WalletSingleton walletSingleton = WalletSingleton.getInstance();
 
     private ArrayList<Coupon> mCoupons;
 
