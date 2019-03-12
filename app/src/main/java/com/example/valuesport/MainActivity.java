@@ -139,7 +139,11 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         Set up for location, timer and related views and button ends here
          */
     }
-
+/**
+* Loads data from SharedPreferences. If data is not available (does not exist yet), function sets Owned Coupons to empty.
+* If data is found, the function updates the Owned Coupon. On the first load, the function sets the value of
+* isStartedBefore to true.
+*/
     private void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         Gson gson = new Gson();
@@ -159,14 +163,18 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
         isStartedBefore = true;
     }
-
+/**
+* This function shows the main menu
+*/
     public void showPopup(View v) { //Menu buttonin onClick funktio, avaa pudotusvalikon
         PopupMenu popup = new PopupMenu(this, v);
         popup.setOnMenuItemClickListener(this);
         popup.inflate(R.menu.mainmenu);
         popup.show();
     }
-
+/**
+* Grants credits based on the distance traveled and divided by 10.
+*/
     public void grantCredits() {
         float matka = mLocationService.getfullDistance();
         int matkaInt = (Math.round(matka)) / 10;
@@ -192,12 +200,16 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 return false;
         }
     }
-
+/**
+* Starts BuyCouponActivity
+*/
     public void toStore() {
         Intent intent = new Intent(this, BuyCouponActivity.class);
         startActivity(intent);
     }
-
+/**
+* Starts WalletActivity
+*/
     public void toWallet() {
         Intent intent = new Intent(this, WalletActivity.class);
         startActivity(intent);
@@ -278,7 +290,11 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
      * Methods related to location permissions end here
      */
 
-
+ /**
+ * Loads credits from SharedPreferences. If data is not available (does not exist yet), function sets available credits to 0.
+ * If credits are found, the function updates the users' credits. On the first load, the function sets the value of
+ * isStartedBefore to true.
+ */
     private void loadCredits() {
         SharedPreferences sharedPreferences = getSharedPreferences("credit preferences", MODE_PRIVATE);
         Gson gson = new Gson();
@@ -287,7 +303,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         WalletSingleton walletSingleton = WalletSingleton.getInstance();
         ArrayList<String> temp = new ArrayList<>();
         if (json == null) {
-            walletSingleton.setCredits(1);
+            walletSingleton.setCredits(0);
             Log.d("debug", "no credits at preferences");
         } else {
             //temp = gson.fromJson(json, type);
@@ -298,6 +314,11 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         isStartedBefore = true;
     }
 
+
+/**
+* Saves credits into SharedPreferences as json with the help of Gson. Gson converts Java objects into json.
+*
+*/
     private void saveCredits() {
         SharedPreferences sharedPreferences = getSharedPreferences("credit preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
