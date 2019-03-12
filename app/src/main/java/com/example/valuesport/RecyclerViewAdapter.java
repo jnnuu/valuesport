@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -63,12 +64,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 .load(mCoupons.get(i).getCouponImageUrl())
                 .into(viewHolder.viewImage);
 
-        //Check if current activity is an instance of BuyCouponActivity or WalletActivity
+
         viewHolder.viewTitle.setText(mCoupons.get(i).getCouponTitle());
+        //Check if current activity is an instance of BuyCouponActivity or WalletActivity, show no price if WalletActivity
         if (mContext instanceof BuyCouponActivity) {
-            viewHolder.viewPrice.setText(String.format("%s kredittiä", String.valueOf(mCoupons.get(i).getCouponPrice())));
+
+            viewHolder.viewPrice.setText(String.format(String.valueOf(mCoupons.get(i).getCouponPrice())));
+            viewHolder.viewCreditIcon.setVisibility(View.VISIBLE);
         } else if (mContext instanceof WalletActivity) {
+
             viewHolder.viewPrice.setText("");
+            viewHolder.viewCreditIcon.setVisibility(View.GONE);
         }
 
         //Decides which activity is launched next based on the current activity mContext.
@@ -106,12 +112,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         final CircleImageView viewImage;
+        final ImageView viewCreditIcon;
         final TextView viewTitle;
         final TextView viewPrice;
         final RelativeLayout itemLayout;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
+            viewCreditIcon = itemView.findViewById(R.id.credit_icon);
             viewImage = itemView.findViewById(R.id.image);
             viewTitle = itemView.findViewById(R.id.title);
             viewPrice = itemView.findViewById(R.id.price);

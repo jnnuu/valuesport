@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -76,11 +77,19 @@ public class BuyDialogActivity extends AppCompatActivity {
             walletSingleton.addCouponToWallet(storeContentSingleton.getCoupon(i));
             walletSingleton.useCredits(storeContentSingleton.getCoupon(i).getCouponPrice());
             Log.d("osto", String.valueOf(WalletSingleton.getCredits()));
-            Toast.makeText(this, "Item succesfully added to wallet! credits left: " + WalletSingleton.getCredits(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Item succesfully added to wallet! credits left: " + WalletSingleton.getCredits(), Toast.LENGTH_SHORT).show();
+            Toast toast= Toast.makeText(this,
+                    "Item succesfully added to wallet credits left:" + WalletSingleton.getCredits(), Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
 
         } else {
             Log.d("osto", "Not enough credits");
-            Toast.makeText(this, "Not enough credits! You currently have: " + WalletSingleton.getCredits(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Not enough credits! You currently have: " + WalletSingleton.getCredits(), Toast.LENGTH_SHORT).show();
+            Toast toast= Toast.makeText(this,
+                    "Not enough credits! You currently have: " + WalletSingleton.getCredits(), Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
         }
 
         saveCredits();

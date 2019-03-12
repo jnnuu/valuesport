@@ -5,9 +5,11 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
@@ -68,6 +70,10 @@ public class UseCouponActivity extends AppCompatActivity {
     }
     public void use(View v) {
         WalletSingleton.removeCoupon(i);
+        Toast toast= Toast.makeText(this,
+                "Coupon used!", Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
         Intent Intent = new Intent(this, WalletActivity.class);
         startActivity(Intent);
     }
