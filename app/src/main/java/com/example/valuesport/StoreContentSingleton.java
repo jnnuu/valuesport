@@ -18,7 +18,7 @@ class StoreContentSingleton {
 
     /**
      *
-     * @return ArrayList of <code>Coupon</code> class objects
+     * @return ArrayList of Coupon class objects
      */
     public ArrayList<Coupon> getCoupons() {
         return coupons;
@@ -27,7 +27,7 @@ class StoreContentSingleton {
     /**
      *
      * @param i index of element of coupons to be returned as integer value
-     * @return object of <code>Coupon</code> class
+     * @return object of Coupon class
      */
     public Coupon getCoupon(int i) {
         return coupons.get(i);
@@ -35,7 +35,7 @@ class StoreContentSingleton {
 
     /**
      *
-     * @param coupons ArrayList of <code>Coupon</code> class objects
+     * @param coupons ArrayList of Coupon class objects
      */
     public void setCoupons(ArrayList<Coupon> coupons) {
         this.coupons = coupons;

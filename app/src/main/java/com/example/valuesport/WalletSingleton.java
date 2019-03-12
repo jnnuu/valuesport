@@ -29,7 +29,7 @@ class WalletSingleton {
 
     /**
      *
-     * @return ArrayList of objects of <code>Coupon</code> class
+     * @return ArrayList of objects of Coupon class
      */
     ArrayList<Coupon> getOwnedCoupons() {
         return ownedCoupons;
