@@ -58,6 +58,8 @@ public class UseCouponActivity extends AppCompatActivity {
         }
         ((TextView)findViewById(R.id.title))
                 .setText(walletSingleton.getOwnedCoupons().get(i).getCouponTitle());
+        ((TextView)findViewById(R.id.description))
+                .setText(walletSingleton.getOwnedCoupons().get(i).getCouponDescription());
         Glide.with(this)
                 .asBitmap()
                 .load(walletSingleton.getOwnedCoupons().get(i).getCouponImageUrl())
