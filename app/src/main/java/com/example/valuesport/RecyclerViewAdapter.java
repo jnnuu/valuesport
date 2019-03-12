@@ -10,15 +10,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
-* RecyclerViewAdapter is used to display a list of objects
-*
-*/
+ * RecyclerViewAdapter is used to display a list of objects
+ *
+ * @author Jonni Uusi-Hakimo
+ */
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
@@ -28,13 +31,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private Context mContext;
 
-/**
-* RecyclerViewAdapter is used to display objects and pictures correctly as lists in BuyCouponActivity and WalletActivity.
-*
-* @param Context current context
-* @param ArrayList<Coupon> An ArrayList containing Coupon objects.
-*
-*/
+    /**
+     * RecyclerViewAdapter is used to display objects and pictures correctly as lists in BuyCouponActivity and WalletActivity.
+     *
+     * @param context current context
+     * @param coupons list Coupon objects as ArrayList
+     */
 
     public RecyclerViewAdapter(Context context, ArrayList<Coupon> coupons) {
 
@@ -54,16 +56,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
         Log.e(TAG, "onBindViewHolder: called");
 
-/**
-*Glide is used to fetch images from the internet.
-*/
+
+        //Glide is used to fetch images from the internet.
+
         Glide.with(mContext)
                 .asBitmap()
                 .load(mCoupons.get(i).getCouponImageUrl())
                 .into(viewHolder.viewImage);
-/**
-* Checks if current activity is an instance of BuyCouponActivity or WalletActivity
-*/
+
+        //Check if current activity is an instance of BuyCouponActivity or WalletActivity
         viewHolder.viewTitle.setText(mCoupons.get(i).getCouponTitle());
         if (mContext instanceof BuyCouponActivity) {
             viewHolder.viewPrice.setText(String.valueOf(mCoupons.get(i).getCouponPrice()) + " kredittiä");
@@ -71,9 +72,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             viewHolder.viewPrice.setText("");
         }
 
-/**
-* Decides which activity is launched next based on the current activity mContext.
-*/
+        //Decides which activity is launched next based on the current activity mContext.
         viewHolder.itemLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,14 +83,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     nextActivity.putExtra("index", i);
                     mContext.startActivity(nextActivity);
 
-                    } else if (mContext instanceof WalletActivity) {
+                } else if (mContext instanceof WalletActivity) {
                     Intent nextActivity = new Intent(mContext, UseCouponActivity.class);
                     nextActivity.putExtra("index", i);
                     mContext.startActivity(nextActivity);
                 }
-                // tästä käyntiin activity jossa hyväksytään kupongin osto
-
-
             }
         });
     }
@@ -100,13 +96,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public int getItemCount() {
         return mCoupons.size();
     }
-/**
-* ViewHolder
-* Adds relevant views for a single Coupon shown in a list of coupons.
-* CircleImageView uses an external library and it's used to round the corners of an image.
-* Price and title are shown as normal TextView's.
-* RelativeLayout is used, and it uses layout_one_item.xml file to display the said coupons data
-*/
+
+    /**
+     * ViewHolder
+     * Adds relevant views for a single Coupon shown in a list of coupons.
+     * CircleImageView uses an external library and it's used to round the corners of an image.
+     * Price and title are shown as normal TextView's.
+     * RelativeLayout is used, and it uses layout_one_item.xml file to display the said coupons data
+     */
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         CircleImageView viewImage;

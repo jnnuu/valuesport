@@ -19,17 +19,6 @@ public class WalletActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Log.d(TAG, "oncreate started @walletactivity");
-
-// Tästä tarvittaessa funktio nappiin, käy ensin poistamassa nappia varten kommentti myös content_wall.xml:stä
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         WalletCatalog();
 
