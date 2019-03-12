@@ -6,14 +6,6 @@
     android:background="@color/darkgray"
     tools:context=".BuyCouponActivity">
 
-
-<!--    <view class="android.support.v7.app.AlertController$RecycleListView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/store">
-
-    </view>-->
-
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
