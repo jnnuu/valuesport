@@ -81,7 +81,7 @@ public class BuyDialogActivity extends AppCompatActivity {
             Log.d("osto", String.valueOf(WalletSingleton.getCredits()));
             //Toast.makeText(this, "Item succesfully added to wallet! credits left: " + WalletSingleton.getCredits(), Toast.LENGTH_SHORT).show();
             Toast toast = Toast.makeText(this,
-                    "Item succesfully added to wallet credits left:" + WalletSingleton.getCredits(), Toast.LENGTH_SHORT);
+                    "Item succesfully added to wallet!\nCredits left: " + WalletSingleton.getCredits(), Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
 
@@ -89,7 +89,7 @@ public class BuyDialogActivity extends AppCompatActivity {
             Log.d("osto", "Not enough credits");
             //Toast.makeText(this, "Not enough credits! You currently have: " + WalletSingleton.getCredits(), Toast.LENGTH_SHORT).show();
             Toast toast = Toast.makeText(this,
-                    "Not enough credits! You currently have: " + WalletSingleton.getCredits(), Toast.LENGTH_SHORT);
+                    "Not enough credits!\nYou currently have: " + WalletSingleton.getCredits(), Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
         }
