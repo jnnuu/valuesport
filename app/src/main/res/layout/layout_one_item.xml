@@ -22,7 +22,8 @@
         android:textColor="@color/white"
         android:textSize="20sp"
         android:layout_marginStart="23dp"
-        android:layout_toEndOf="@id/image" />
+        android:layout_toEndOf="@id/image"
+        android:fontFamily="sans-serif-smallcaps"/>
 
     <TextView
         android:id="@+id/price"
@@ -34,5 +35,6 @@
         android:layout_marginStart="0dp"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="9dp"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        android:fontFamily="sans-serif-medium"/>
 </RelativeLayout>

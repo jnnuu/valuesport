@@ -16,7 +16,8 @@
         android:src="@mipmap/ic_launcher"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <Button
         android:id="@+id/button"
@@ -34,7 +35,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="sans-serif-smallcaps"/>
 
     <TextView
         android:id="@+id/title"
@@ -45,7 +47,8 @@
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image" />
+        app:layout_constraintTop_toBottomOf="@+id/image"
+        android:fontFamily="sans-serif-smallcaps"/>
 
 
 </android.support.constraint.ConstraintLayout>

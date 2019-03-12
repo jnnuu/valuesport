@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">ValueSport</string>
     <string name="title_activity_wallet">Wallet</string>
-    <string name="title_store">ValueStore</string>
+    <string name="title_store">Store</string>
     <string name="title_buydialog">Confirm purchase</string>
     <string name="buy">Buy</string>
     <string name="menu">MENU</string>
