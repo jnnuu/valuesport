@@ -29,7 +29,6 @@ public class BuyDialogActivity extends AppCompatActivity {
     }
 
     private void saveCredits() {
-        Log.d("debug", "meneekö ikinä tänne");
         SharedPreferences sharedPreferences = getSharedPreferences("credit preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         String jsonc = String.valueOf(WalletSingleton.getCredits());
@@ -58,6 +57,8 @@ public class BuyDialogActivity extends AppCompatActivity {
         }
         ((TextView)findViewById(R.id.title))
                 .setText(storeContentSingleton.getCoupon(i).getCouponTitle());
+        ((TextView)findViewById(R.id.description))
+                .setText(storeContentSingleton.getCoupon(i).getCouponDescription());
         ((TextView)findViewById(R.id.price))
                 .setText(String.valueOf(storeContentSingleton.getCoupon(i).getCouponPrice()));
 

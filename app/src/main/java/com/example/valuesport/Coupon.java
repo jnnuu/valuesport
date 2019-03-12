@@ -9,8 +9,13 @@ package com.example.valuesport;
 public class Coupon {
 
     private final String couponTitle;
-    private final int couponPrice;
     private final String couponImageUrl;
+    private final String couponDescription;
+    private final int couponPrice;
+
+
+
+
 
     /**
      * Class constructor
@@ -18,8 +23,9 @@ public class Coupon {
      * @param couponPrice price of coupon as int
      * @param couponImageUrl specific URL of coupon icon as String
      */
-    public Coupon(String couponTitle, int couponPrice, String couponImageUrl) {
+    public Coupon(String couponTitle, String couponDescription, int couponPrice, String couponImageUrl) {
         this.couponTitle = couponTitle;
+        this.couponDescription = couponDescription;
         this.couponPrice = couponPrice;
         this.couponImageUrl = couponImageUrl;
     }
@@ -47,4 +53,13 @@ public class Coupon {
     public String getCouponImageUrl() {
         return couponImageUrl;
     }
+
+    /**
+     *
+     * @return description of coupon as String
+     */
+    public String getCouponDescription() {
+        return couponDescription;
+    }
 }
+
