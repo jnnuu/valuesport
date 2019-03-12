@@ -1,15 +1,15 @@
 package com.example.valuesport;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 
@@ -57,11 +57,11 @@ public class BuyDialogActivity extends AppCompatActivity {
         if (b != null) {
             i = b.getInt("index", 0);
         }
-        ((TextView)findViewById(R.id.title))
+        ((TextView) findViewById(R.id.title))
                 .setText(storeContentSingleton.getCoupon(i).getCouponTitle());
-        ((TextView)findViewById(R.id.description))
+        ((TextView) findViewById(R.id.description))
                 .setText(storeContentSingleton.getCoupon(i).getCouponDescription());
-        ((TextView)findViewById(R.id.price))
+        ((TextView) findViewById(R.id.price))
                 .setText(String.valueOf(storeContentSingleton.getCoupon(i).getCouponPrice()));
 
 
@@ -72,14 +72,15 @@ public class BuyDialogActivity extends AppCompatActivity {
 
 
     }
+
     public void buy(View v) {
-        if (WalletSingleton.getCredits() >= storeContentSingleton.getCoupon(i).getCouponPrice()){
+        if (WalletSingleton.getCredits() >= storeContentSingleton.getCoupon(i).getCouponPrice()) {
             Log.d("osto", String.valueOf(WalletSingleton.getCredits()));
             walletSingleton.addCouponToWallet(storeContentSingleton.getCoupon(i));
             walletSingleton.useCredits(storeContentSingleton.getCoupon(i).getCouponPrice());
             Log.d("osto", String.valueOf(WalletSingleton.getCredits()));
             //Toast.makeText(this, "Item succesfully added to wallet! credits left: " + WalletSingleton.getCredits(), Toast.LENGTH_SHORT).show();
-            Toast toast= Toast.makeText(this,
+            Toast toast = Toast.makeText(this,
                     "Item succesfully added to wallet credits left:" + WalletSingleton.getCredits(), Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
@@ -87,7 +88,7 @@ public class BuyDialogActivity extends AppCompatActivity {
         } else {
             Log.d("osto", "Not enough credits");
             //Toast.makeText(this, "Not enough credits! You currently have: " + WalletSingleton.getCredits(), Toast.LENGTH_SHORT).show();
-            Toast toast= Toast.makeText(this,
+            Toast toast = Toast.makeText(this,
                     "Not enough credits! You currently have: " + WalletSingleton.getCredits(), Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();

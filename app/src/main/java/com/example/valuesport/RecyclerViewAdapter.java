@@ -69,7 +69,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         //Check if current activity is an instance of BuyCouponActivity or WalletActivity, show no price if WalletActivity
         if (mContext instanceof BuyCouponActivity) {
 
-            viewHolder.viewPrice.setText(String.format(String.valueOf(mCoupons.get(i).getCouponPrice())));
+            viewHolder.viewPrice.setText(String.valueOf(mCoupons.get(i).getCouponPrice()));
             viewHolder.viewCreditIcon.setVisibility(View.VISIBLE);
         } else if (mContext instanceof WalletActivity) {
 

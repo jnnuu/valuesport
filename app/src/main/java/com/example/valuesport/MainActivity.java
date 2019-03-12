@@ -15,8 +15,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
 import android.util.Log;
-
-import com.google.gson.reflect.TypeToken;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -24,6 +22,7 @@ import android.widget.TextView;
 
 import com.example.valuesport.LocationService.LocationService;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -60,10 +59,9 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
             //sets time and distance traveled into the views
             String distFormatted;
-            if(mLocationService.getfullDistance() < 1000){
+            if (mLocationService.getfullDistance() < 1000) {
                 distFormatted = String.format("%1$4.0f m", mLocationService.getfullDistance());
-            }
-            else{
+            } else {
                 float num1 = mLocationService.getfullDistance() / 1000;
                 distFormatted = String.format("%1$4.2f km", num1);
             }
@@ -137,11 +135,12 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         Set up for location, timer and related views and button ends here
          */
     }
-/**
-* Loads data from SharedPreferences. If data is not available (does not exist yet), function sets Owned Coupons to empty.
-* If data is found, the function updates the Owned Coupon. On the first load, the function sets the value of
-* isStartedBefore to true.
-*/
+
+    /**
+     * Loads data from SharedPreferences. If data is not available (does not exist yet), function sets Owned Coupons to empty.
+     * If data is found, the function updates the Owned Coupon. On the first load, the function sets the value of
+     * isStartedBefore to true.
+     */
     private void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         Gson gson = new Gson();
@@ -161,19 +160,21 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
         isStartedBefore = true;
     }
-/**
-* This function shows the main menu
-*/
+
+    /**
+     * This function shows the main menu
+     */
     public void showPopup(View v) { //Menu buttonin onClick funktio, avaa pudotusvalikon
         PopupMenu popup = new PopupMenu(this, v);
         popup.setOnMenuItemClickListener(this);
         popup.inflate(R.menu.mainmenu);
         popup.show();
     }
-/**
-* Grants credits based on the distance traveled and divided by 10.
-*/
-private void grantCredits() {
+
+    /**
+     * Grants credits based on the distance traveled and divided by 10.
+     */
+    private void grantCredits() {
         float matka = mLocationService.getfullDistance();
         int matkaInt = (Math.round(matka)) / 10;
         Log.d("debug", String.valueOf(matka));
@@ -196,17 +197,19 @@ private void grantCredits() {
                 return false;
         }
     }
-/**
-* Starts BuyCouponActivity
-*/
-private void toStore() {
+
+    /**
+     * Starts BuyCouponActivity
+     */
+    private void toStore() {
         Intent intent = new Intent(this, BuyCouponActivity.class);
         startActivity(intent);
     }
-/**
-* Starts WalletActivity
-*/
-private void toWallet() {
+
+    /**
+     * Starts WalletActivity
+     */
+    private void toWallet() {
         Intent intent = new Intent(this, WalletActivity.class);
         startActivity(intent);
     }
@@ -285,11 +288,11 @@ private void toWallet() {
      * Methods related to location permissions end here
      */
 
- /**
- * Loads credits from SharedPreferences. If data is not available (does not exist yet), function sets available credits to 0.
- * If credits are found, the function updates the users' credits. On the first load, the function sets the value of
- * isStartedBefore to true.
- */
+    /**
+     * Loads credits from SharedPreferences. If data is not available (does not exist yet), function sets available credits to 0.
+     * If credits are found, the function updates the users' credits. On the first load, the function sets the value of
+     * isStartedBefore to true.
+     */
     private void loadCredits() {
         SharedPreferences sharedPreferences = getSharedPreferences("credit preferences", MODE_PRIVATE);
         String amount = sharedPreferences.getString("credits", null);
@@ -306,10 +309,9 @@ private void toWallet() {
     }
 
 
-/**
-* Saves credits into SharedPreferences as String.
-*
-*/
+    /**
+     * Saves credits into SharedPreferences as String.
+     */
     private void saveCredits() {
         SharedPreferences sharedPreferences = getSharedPreferences("credit preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();

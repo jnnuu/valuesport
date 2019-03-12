@@ -5,8 +5,8 @@ import android.util.Log;
 import java.util.ArrayList;
 
 /**
- *
  * Singleton class which holds credits and coupons of users.
+ *
  * @author Jesse Väärälä
  */
 class WalletSingleton {
@@ -16,7 +16,6 @@ class WalletSingleton {
     static ArrayList<Coupon> ownedCoupons;
 
     /**
-     *
      * @return single instance of WalletSingleton
      */
     static WalletSingleton getInstance() {
@@ -28,7 +27,6 @@ class WalletSingleton {
     }
 
     /**
-     *
      * @return ArrayList of objects of Coupon class
      */
     ArrayList<Coupon> getOwnedCoupons() {
@@ -37,6 +35,7 @@ class WalletSingleton {
 
     /**
      * Sets content of ArrayList ownedCoupons
+     *
      * @param ownedCoupons ArrayList of Coupon objects
      */
     void setOwnedCoupons(ArrayList<Coupon> ownedCoupons) {
@@ -44,7 +43,6 @@ class WalletSingleton {
     }
 
     /**
-     *
      * @param coupon Coupon object as parameter
      */
     void addCouponToWallet(Coupon coupon) {
@@ -53,7 +51,6 @@ class WalletSingleton {
     }
 
     /**
-     *
      * @return amount of credits as integer value
      */
     static int getCredits() {
@@ -62,6 +59,7 @@ class WalletSingleton {
 
     /**
      * Removes specified index from ArrayList ownedCoupons
+     *
      * @param i index to be removed as integer value
      */
     static void removeCoupon(int i) {
@@ -70,6 +68,7 @@ class WalletSingleton {
 
     /**
      * Sets amount of credits to given value
+     *
      * @param credits amount of credits to be set as integer value
      */
     void setCredits(int credits) {
@@ -78,6 +77,7 @@ class WalletSingleton {
 
     /**
      * Decreases credits by given amount
+     *
      * @param amount amount of credits to be decreased as integer value
      */
     void useCredits(int amount) {

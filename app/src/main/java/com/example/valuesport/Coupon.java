@@ -14,13 +14,11 @@ public class Coupon {
     private final int couponPrice;
 
 
-
-
-
     /**
      * Class constructor
-     * @param couponTitle holding title of coupon as String
-     * @param couponPrice price of coupon as int
+     *
+     * @param couponTitle    holding title of coupon as String
+     * @param couponPrice    price of coupon as int
      * @param couponImageUrl specific URL of coupon icon as String
      */
     public Coupon(String couponTitle, String couponDescription, int couponPrice, String couponImageUrl) {
@@ -31,7 +29,6 @@ public class Coupon {
     }
 
     /**
-     *
      * @return title of Coupon object as String
      */
     public String getCouponTitle() {
@@ -39,7 +36,6 @@ public class Coupon {
     }
 
     /**
-     *
      * @return price of Coupon object as integer
      */
     public int getCouponPrice() {
@@ -47,7 +43,6 @@ public class Coupon {
     }
 
     /**
-     *
      * @return specific Url as String
      */
     public String getCouponImageUrl() {
@@ -55,7 +50,6 @@ public class Coupon {
     }
 
     /**
-     *
      * @return description of coupon as String
      */
     public String getCouponDescription() {

@@ -2,8 +2,8 @@ package com.example.valuesport;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -40,7 +40,6 @@ public class UseCouponActivity extends AppCompatActivity {
     }
 
 
-
     @Override
     protected void onPause() {
         super.onPause();
@@ -58,9 +57,9 @@ public class UseCouponActivity extends AppCompatActivity {
         if (b != null) {
             i = b.getInt("index", 0);
         }
-        ((TextView)findViewById(R.id.title))
+        ((TextView) findViewById(R.id.title))
                 .setText(walletSingleton.getOwnedCoupons().get(i).getCouponTitle());
-        ((TextView)findViewById(R.id.description))
+        ((TextView) findViewById(R.id.description))
                 .setText(walletSingleton.getOwnedCoupons().get(i).getCouponDescription());
         Glide.with(this)
                 .asBitmap()
@@ -68,9 +67,10 @@ public class UseCouponActivity extends AppCompatActivity {
                 .into((ImageView) findViewById(R.id.image));
 
     }
+
     public void use(View v) {
         WalletSingleton.removeCoupon(i);
-        Toast toast= Toast.makeText(this,
+        Toast toast = Toast.makeText(this,
                 "Coupon used!", Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
