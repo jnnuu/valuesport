@@ -11,12 +11,14 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
-
 import java.util.ArrayList;
-
 import de.hdodenhof.circleimageview.CircleImageView;
+
+/**
+* RecyclerViewAdapter is used to display a list of objects
+*
+*/
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
@@ -25,6 +27,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private ArrayList<Coupon> mCoupons;
 
     private Context mContext;
+
+/**
+* RecyclerViewAdapter is used to display objects and pictures correctly as lists in BuyCouponActivity and WalletActivity.
+*
+* @param Context current context
+* @param ArrayList<Coupon> An ArrayList containing Coupon objects.
+*
+*/
 
     public RecyclerViewAdapter(Context context, ArrayList<Coupon> coupons) {
 
@@ -44,12 +54,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
         Log.e(TAG, "onBindViewHolder: called");
 
-
+/**
+*Glide is used to fetch images from the internet.
+*/
         Glide.with(mContext)
                 .asBitmap()
                 .load(mCoupons.get(i).getCouponImageUrl())
                 .into(viewHolder.viewImage);
-
+/**
+* Checks if current activity is an instance of BuyCouponActivity or WalletActivity
+*/
         viewHolder.viewTitle.setText(mCoupons.get(i).getCouponTitle());
         if (mContext instanceof BuyCouponActivity) {
             viewHolder.viewPrice.setText(String.valueOf(mCoupons.get(i).getCouponPrice()) + " kredittiä");
@@ -57,14 +71,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             viewHolder.viewPrice.setText("");
         }
 
-
+/**
+* Decides which activity is launched next based on the current activity mContext.
+*/
         viewHolder.itemLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Log.d(TAG, "onClick: clicked on: " + mCoupons.get(i).getCouponTitle());
-                //Toast.makeText(mContext, "Item clicked", Toast.LENGTH_SHORT).show();
-                Log.d("Debug", String.valueOf(mContext));
 
                 if (mContext instanceof BuyCouponActivity) {
 
@@ -88,7 +100,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public int getItemCount() {
         return mCoupons.size();
     }
-
+/**
+* ViewHolder
+* Adds relevant views for a single Coupon shown in a list of coupons.
+* CircleImageView uses an external library and it's used to round the corners of an image.
+* Price and title are shown as normal TextView's.
+* RelativeLayout is used, and it uses layout_one_item.xml file to display the said coupons data
+*/
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         CircleImageView viewImage;
