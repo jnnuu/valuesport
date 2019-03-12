@@ -28,7 +28,6 @@ public class UseCouponActivity extends AppCompatActivity {
     }
 
     private void saveCredits() {
-        Log.d("debug", "meneekö ikinä tänne");
         SharedPreferences sharedPreferences = getSharedPreferences("credit preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();

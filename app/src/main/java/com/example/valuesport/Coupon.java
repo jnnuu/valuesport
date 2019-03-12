@@ -1,35 +1,50 @@
 package com.example.valuesport;
 
+/**
+ * The Coupon class wraps data of coupons into object
+ *
+ * @author Jesse Väärälä
+ */
+
 public class Coupon {
+
     private String couponTitle;
     private int couponPrice;
-    private boolean couponUsable;
     private String couponImageUrl;
 
-    public Coupon(String couponTitle, int couponPrice, boolean couponUsable, String couponImageUrl) {
+    /**
+     * Class constructor
+     * @param couponTitle holding title of coupon as String
+     * @param couponPrice price of coupon as int
+     * @param couponImageUrl specific URL of coupon icon as String
+     */
+    public Coupon(String couponTitle, int couponPrice, String couponImageUrl) {
         this.couponTitle = couponTitle;
         this.couponPrice = couponPrice;
-        this.couponUsable = couponUsable;
         this.couponImageUrl = couponImageUrl;
     }
 
+    /**
+     *
+     * @return title of Coupon object as String
+     */
     public String getCouponTitle() {
         return couponTitle;
     }
 
+    /**
+     *
+     * @return price of Coupon object as integer
+     */
     public int getCouponPrice() {
         return couponPrice;
     }
 
-    public boolean isCouponUsable() {
-        return couponUsable;
-    }
-
+    /**
+     *
+     * @return specific Url as String
+     */
     public String getCouponImageUrl() {
         return couponImageUrl;
-    }
-
-    public void setCouponUsable(boolean couponUsable) {
-        this.couponUsable = couponUsable;
     }
 }
