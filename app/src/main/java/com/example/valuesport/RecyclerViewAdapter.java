@@ -66,7 +66,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         //Check if current activity is an instance of BuyCouponActivity or WalletActivity
         viewHolder.viewTitle.setText(mCoupons.get(i).getCouponTitle());
         if (mContext instanceof BuyCouponActivity) {
-            viewHolder.viewPrice.setText(String.valueOf(mCoupons.get(i).getCouponPrice()) + " kredittiä");
+            viewHolder.viewPrice.setText(String.format("%s kredittiä", String.valueOf(mCoupons.get(i).getCouponPrice())));
         } else if (mContext instanceof WalletActivity) {
             viewHolder.viewPrice.setText("");
         }

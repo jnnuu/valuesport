@@ -35,15 +35,15 @@ class StoreContentSingleton {
         return coupons.get(i);
     }
 
-    /**
-     *
-     * @param coupons ArrayList of Coupon class objects
-     */
-    public void setCoupons(ArrayList<Coupon> coupons) {
-        this.coupons = coupons;
-    }
+//    /**
+//     *
+//     * @param coupons ArrayList of Coupon class objects
+//     */
+//    public void setCoupons(ArrayList<Coupon> coupons) {
+//        this.coupons = coupons;
+//    }
 
-    private ArrayList<Coupon> coupons;
+    private final ArrayList<Coupon> coupons;
 
     /**
      *

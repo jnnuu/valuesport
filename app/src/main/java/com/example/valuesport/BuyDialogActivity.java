@@ -1,21 +1,15 @@
 package com.example.valuesport;
 
-import android.app.SharedElementCallback;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
-
-import de.hdodenhof.circleimageview.CircleImageView;
-
-import static com.example.valuesport.R.id.image;
 
 
 public class BuyDialogActivity extends AppCompatActivity {
@@ -38,7 +32,6 @@ public class BuyDialogActivity extends AppCompatActivity {
         Log.d("debug", "meneekö ikinä tänne");
         SharedPreferences sharedPreferences = getSharedPreferences("credit preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        Gson gson = new Gson();
         String jsonc = String.valueOf(WalletSingleton.getCredits());
         Log.d("debug", jsonc);
         editor.putString("credits", jsonc);

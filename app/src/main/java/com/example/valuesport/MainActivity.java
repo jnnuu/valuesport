@@ -192,8 +192,6 @@ private void grantCredits() {
             case R.id.wallet:
                 toWallet();
                 return true;
-            case R.id.exit:
-                return true;
             default:
                 return false;
         }
