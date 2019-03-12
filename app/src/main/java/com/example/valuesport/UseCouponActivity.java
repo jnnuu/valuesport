@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 
 public class UseCouponActivity extends AppCompatActivity {
-    private static WalletSingleton walletSingleton = WalletSingleton.getInstance();
+    private static final WalletSingleton walletSingleton = WalletSingleton.getInstance();
     private int i;
 
     private void saveData() {
@@ -30,7 +30,6 @@ public class UseCouponActivity extends AppCompatActivity {
     private void saveCredits() {
         SharedPreferences sharedPreferences = getSharedPreferences("credit preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        Gson gson = new Gson();
         String jsonc = String.valueOf(WalletSingleton.getCredits());
         Log.d("debug", jsonc);
         editor.putString("credits", jsonc);

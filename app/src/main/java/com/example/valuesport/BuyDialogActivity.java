@@ -20,8 +20,8 @@ import static com.example.valuesport.R.id.image;
 
 public class BuyDialogActivity extends AppCompatActivity {
 
-    private static StoreContentSingleton storeContentSingleton = StoreContentSingleton.getInstance();
-    private static WalletSingleton walletSingleton = WalletSingleton.getInstance();
+    private static final StoreContentSingleton storeContentSingleton = StoreContentSingleton.getInstance();
+    private static final WalletSingleton walletSingleton = WalletSingleton.getInstance();
     private int i;
 
     private void saveData() {

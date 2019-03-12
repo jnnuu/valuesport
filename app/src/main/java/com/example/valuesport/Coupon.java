@@ -8,9 +8,9 @@ package com.example.valuesport;
 
 public class Coupon {
 
-    private String couponTitle;
-    private int couponPrice;
-    private String couponImageUrl;
+    private final String couponTitle;
+    private final int couponPrice;
+    private final String couponImageUrl;
 
     /**
      * Class constructor

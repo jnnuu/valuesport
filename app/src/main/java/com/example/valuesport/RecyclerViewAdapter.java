@@ -27,9 +27,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private static final String TAG = "RecyclerViewAdapter";
 
-    private ArrayList<Coupon> mCoupons;
+    private final ArrayList<Coupon> mCoupons;
 
-    private Context mContext;
+    private final Context mContext;
 
     /**
      * RecyclerViewAdapter is used to display objects and pictures correctly as lists in BuyCouponActivity and WalletActivity.
@@ -105,10 +105,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
      */
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        CircleImageView viewImage;
-        TextView viewTitle;
-        TextView viewPrice;
-        RelativeLayout itemLayout;
+        final CircleImageView viewImage;
+        final TextView viewTitle;
+        final TextView viewPrice;
+        final RelativeLayout itemLayout;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);

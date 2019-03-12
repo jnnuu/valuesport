@@ -15,7 +15,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
 import android.util.Log;
-import com.google.gson.*;
+
 import com.google.gson.reflect.TypeToken;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,7 +24,6 @@ import android.widget.TextView;
 
 import com.example.valuesport.LocationService.LocationService;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -47,10 +46,9 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     private TextView distanceView;
     private TextView timerView;
     private long startTime = 0;
-    private String distFormatted;
 
     //creates timer for app
-    private Handler timerHandler = new Handler();
+    private final Handler timerHandler = new Handler();
     private final Runnable timerRunnable = new Runnable() {
         @Override
         public void run() {
@@ -61,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             seconds = seconds % 60;
 
             //sets time and distance traveled into the views
+            String distFormatted;
             if(mLocationService.getfullDistance() < 1000){
                 distFormatted = String.format("%1$4.0f m", mLocationService.getfullDistance());
             }
@@ -82,7 +81,6 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //Log.d("debug", "onCreate() called");
-        WalletSingleton walletInstance = WalletSingleton.getInstance();
         if (!isStartedBefore) {
             loadData();
             loadCredits();
@@ -101,11 +99,11 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         mLocationService = new LocationService(this, this);
 
         //sets up views
-        timerView = (TextView) findViewById(R.id.timerView);
-        distanceView = (TextView) findViewById(R.id.distanceView);
+        timerView = findViewById(R.id.timerView);
+        distanceView = findViewById(R.id.distanceView);
 
         //Sets up imageButton and onclick listener
-        startButton = (ImageButton) findViewById(R.id.startButton);
+        startButton = findViewById(R.id.startButton);
         startButton.setImageResource(R.drawable.start);
 
         startButton.setOnClickListener(new View.OnClickListener() {
@@ -245,9 +243,9 @@ private void toWallet() {
     }
 
     //dialog box definition
-    private void showMessage(String message, DialogInterface.OnClickListener okListener) {
+    private void showMessage(DialogInterface.OnClickListener okListener) {
         new AlertDialog.Builder(this)
-                .setMessage(message)
+                .setMessage("You need to allow access to location for app to be able to use GPS")
                 .setPositiveButton("OK", okListener)
                 .create()
                 .show();
@@ -274,7 +272,7 @@ private void toWallet() {
                     //create a dialog box that informs user that the application need their permission for
                     //location for app to work on a fundamental level
                     Log.d(TAG, "you denied permission for location");
-                    showMessage("You need to allow access to location for app to be able to use GPS",
+                    showMessage(
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
@@ -282,7 +280,6 @@ private void toWallet() {
                                 }
                             });
                 }
-                return;
             }
         }
     }
@@ -297,17 +294,13 @@ private void toWallet() {
  */
     private void loadCredits() {
         SharedPreferences sharedPreferences = getSharedPreferences("credit preferences", MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = sharedPreferences.getString("credits", null);
-        Type type = new TypeToken<ArrayList<String>>() {}.getType();
+        String amount = sharedPreferences.getString("credits", null);
         WalletSingleton walletSingleton = WalletSingleton.getInstance();
-        ArrayList<String> temp = new ArrayList<>();
-        if (json == null) {
+        if (amount == null) {
             walletSingleton.setCredits(0);
             Log.d("debug", "no credits at preferences");
         } else {
-            //temp = gson.fromJson(json, type);
-            walletSingleton.setCredits(Integer.parseInt(json));
+            walletSingleton.setCredits(Integer.parseInt(amount));
             Log.d("debug", "credits loaded");
         }
 
@@ -316,17 +309,15 @@ private void toWallet() {
 
 
 /**
-* Saves credits into SharedPreferences as json with the help of Gson. Gson converts Java objects into json.
+* Saves credits into SharedPreferences as String.
 *
 */
     private void saveCredits() {
         SharedPreferences sharedPreferences = getSharedPreferences("credit preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        Gson gson = new Gson();
-        WalletSingleton walletSingleton = WalletSingleton.getInstance();
-        String jsonc = String.valueOf(walletSingleton.getCredits());
-        Log.d("debug", jsonc);
-        editor.putString("credits", jsonc);
+        String amount = String.valueOf(WalletSingleton.getCredits());
+        Log.d("debug", amount);
+        editor.putString("credits", amount);
         editor.apply();
         Log.d("debug", "Credits SAVED!");
     }

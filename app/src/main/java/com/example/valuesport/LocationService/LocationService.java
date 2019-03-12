@@ -22,8 +22,8 @@ public class LocationService {
 
     private LocationManager mLocationManager;
 
-    private Context mContext;
-    private Activity mActivity;
+    private final Context mContext;
+    private final Activity mActivity;
 
     private static final String TAG = "TESTGPS";            //TAG for log debug entries
     private static final int LOCATION_INTERVAL = 3000;      //time interval for location updates 3 sec
@@ -48,7 +48,7 @@ public class LocationService {
     }
 
     //location listener interface and its methods
-    private LocationListener mLocationListener = new LocationListener(){
+    private final LocationListener mLocationListener = new LocationListener(){
 
         //method that is called when location changes
         @Override

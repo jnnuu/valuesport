@@ -73,7 +73,7 @@ class WalletSingleton {
      * @param credits amount of credits to be set as integer value
      */
     void setCredits(int credits) {
-        this.credits = credits;
+        WalletSingleton.credits = credits;
     }
 
     /**
@@ -81,7 +81,7 @@ class WalletSingleton {
      * @param amount amount of credits to be decreased as integer value
      */
     void useCredits(int amount) {
-        this.credits = this.credits - amount;
+        credits = credits - amount;
     }
 
 

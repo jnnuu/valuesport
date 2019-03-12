@@ -14,7 +14,7 @@ import java.util.Objects;
 public class WalletActivity extends AppCompatActivity {
 
     private static final String TAG = "WalletActivity";
-    private static WalletSingleton walletSingleton = WalletSingleton.getInstance();
+    private static final WalletSingleton walletSingleton = WalletSingleton.getInstance();
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
