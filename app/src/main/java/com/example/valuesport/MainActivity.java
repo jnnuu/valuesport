@@ -95,6 +95,10 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         /*
          * Following code creates LocationService instance, creates timer for the exercise,
          * and sets up needed views and image button to start and track exercise
+         *
+         * When the LocationService is instantiated in the onCreate method,
+         * it causes unwanted behaviour during exercise, if MainActivity is destroyed and created again.
+         * To prevent one case of this, the MainActivity orientation is locked to portrait mode
          */
         //creating instance of LocationService
         mLocationService = new LocationService(this, this);
