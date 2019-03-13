@@ -18,4 +18,5 @@
     <string name="coupon_not_enough_credits">Not enough credits!\nYou currently have: </string>
     <!-- Toast strings in UseCouponActivity -->
     <string name="coupon_used">Coupon used!</string>
+    <string name="alert">Please close the ongoing exercise first.</string>
 </resources>

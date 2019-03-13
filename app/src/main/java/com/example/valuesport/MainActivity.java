@@ -15,10 +15,12 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.valuesport.LocationService.LocationService;
 import com.google.gson.Gson;
@@ -189,10 +191,24 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     public boolean onMenuItemClick(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.store:
-                toStore();
+                if (!isExerciseOn) {
+                    toStore();
+                } else {
+                    Toast toast = Toast.makeText(this,
+                          getResources().getString(R.string.alert), Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
                 return true;
             case R.id.wallet:
-                toWallet();
+                if (!isExerciseOn) {
+                    toWallet();
+                } else {
+                    Toast toast = Toast.makeText(this,
+                            getResources().getString(R.string.alert), Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
                 return true;
             default:
                 return false;
@@ -323,4 +339,6 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         Log.d("debug", "Credits SAVED!");
     }
 
+    @Override
+    public void onBackPressed() {}
 }
