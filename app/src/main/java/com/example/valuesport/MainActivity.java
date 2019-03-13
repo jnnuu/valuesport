@@ -26,6 +26,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
@@ -60,14 +61,14 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             //sets time and distance traveled into the views
             String distFormatted;
             if (mLocationService.getfullDistance() < 1000) {
-                distFormatted = String.format("%1$4.0f m", mLocationService.getfullDistance());
+                distFormatted = String.format(Locale.getDefault(), "%1$4.0f m", mLocationService.getfullDistance());
             } else {
                 float num1 = mLocationService.getfullDistance() / 1000;
-                distFormatted = String.format("%1$4.2f km", num1);
+                distFormatted = String.format(Locale.getDefault(), "%1$4.2f km", num1);
             }
 
             distanceView.setText(distFormatted);
-            timerView.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
+            timerView.setText(String.format(Locale.getDefault(), "%02d:%02d:%02d", hours, minutes, seconds));
 
 
             timerHandler.postDelayed(this, 500);
