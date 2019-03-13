@@ -84,10 +84,10 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             loadData();
             loadCredits();
         }
-        final int creditit = WalletSingleton.getCredits();
+        final int currentCredits = WalletSingleton.getCredits();
         Log.d("debug", "");
         final TextView credits = findViewById(R.id.credits);
-        credits.setText(String.valueOf(creditit));
+        credits.setText(String.valueOf(currentCredits));
 
 
         /*
@@ -176,10 +176,10 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
      * Grants credits based on the distance traveled and divided by 10.
      */
     private void grantCredits() {
-        float matka = mLocationService.getfullDistance();
-        int matkaInt = (Math.round(matka)) / 10;
-        Log.d("debug", String.valueOf(matka));
-        WalletSingleton.credits = WalletSingleton.credits + matkaInt;
+        float dist = mLocationService.getfullDistance();
+        int distInt = (Math.round(dist)) / 10;
+        Log.d("debug", String.valueOf(dist));
+        WalletSingleton.credits = WalletSingleton.credits + distInt;
         Log.d("Debug", String.valueOf(WalletSingleton.credits));
         TextView credits = findViewById(R.id.credits);
         credits.setText(String.valueOf(WalletSingleton.getCredits()));
