@@ -28,6 +28,7 @@ public class BuyCouponActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
+        finish();
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
