@@ -10,4 +10,12 @@
     <string name="wallet">Wallet</string>
     <string name="credits_description">Credits</string>
     <string name="start_button_description">Start button</string>
+
+    <!-- Permission dialog when user denies permission for location in MainActivity-->
+    <string name="permission_message">You need to allow access to location to be able to use exercise feature</string>
+    <!-- Toast strings in BuyDialogActivity-->
+    <string name="coupon_enough_credits">Item successfully added to wallet!\nCredits left: </string>
+    <string name="coupon_not_enough_credits">Not enough credits!\nYou currently have: </string>
+    <!-- Toast strings in UseCouponActivity -->
+    <string name="coupon_used">Coupon used!</string>
 </resources>

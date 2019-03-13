@@ -71,7 +71,7 @@ public class UseCouponActivity extends AppCompatActivity {
     public void use(View v) {
         WalletSingleton.removeCoupon(i);
         Toast toast = Toast.makeText(this,
-                "Coupon used!", Toast.LENGTH_SHORT);
+                getResources().getString(R.string.coupon_used), Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
         finish();

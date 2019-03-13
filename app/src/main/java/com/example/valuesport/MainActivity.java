@@ -246,7 +246,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     //dialog box definition
     private void showMessage(DialogInterface.OnClickListener okListener) {
         new AlertDialog.Builder(this)
-                .setMessage("You need to allow access to location for app to be able to use GPS")
+                .setMessage(getResources().getString(R.string.permission_message))
                 .setPositiveButton("OK", okListener)
                 .create()
                 .show();
@@ -271,7 +271,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                     isExerciseOn = true;
                 } else {
                     //create a dialog box that informs user that the application need their permission for
-                    //location for app to work on a fundamental level
+                    //location for exercise feature to work on a fundamental level
                     Log.d(TAG, "you denied permission for location");
                     showMessage(
                             new DialogInterface.OnClickListener() {
