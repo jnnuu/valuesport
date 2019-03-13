@@ -148,6 +148,8 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
      * If data is found, the function updates the Owned Coupon. On the first load, the function sets the value of
      * isStartedBefore to true.
      */
+
+    // saveData() method is not used in mainActivity so its not defined here. It could be better to build a class for saving and loading data.
     private void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         Gson gson = new Gson();
@@ -169,13 +171,36 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
 
     /**
-     * This function shows the main menu
+     * Loads credits from SharedPreferences. If data is not available (does not exist yet), function sets available credits to 0.
+     * If credits are found, the function updates the users' credits. On the first load, the function sets the value of
+     * isStartedBefore to true.
      */
-    public void showPopup(View v) { //Menu buttonin onClick funktio, avaa pudotusvalikon
-        PopupMenu popup = new PopupMenu(this, v);
-        popup.setOnMenuItemClickListener(this);
-        popup.inflate(R.menu.mainmenu);
-        popup.show();
+    private void loadCredits() {
+        SharedPreferences sharedPreferences = getSharedPreferences("credit preferences", MODE_PRIVATE);
+        String amount = sharedPreferences.getString("credits", null);
+        WalletSingleton walletSingleton = WalletSingleton.getInstance();
+        if (amount == null) {
+            walletSingleton.setCredits(0);
+            Log.d("debug", "no credits at preferences");
+        } else {
+            walletSingleton.setCredits(Integer.parseInt(amount));
+            Log.d("debug", "credits loaded");
+        }
+
+        isStartedBefore = true;
+    }
+
+    /**
+     * Saves credits into SharedPreferences as String.
+     */
+    private void saveCredits() {
+        SharedPreferences sharedPreferences = getSharedPreferences("credit preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        String amount = String.valueOf(WalletSingleton.getCredits());
+        Log.d("debug", amount);
+        editor.putString("credits", amount);
+        editor.apply();
+        Log.d("debug", "Credits SAVED!");
     }
 
     /**
@@ -191,6 +216,18 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         credits.setText(String.valueOf(WalletSingleton.getCredits()));
     }
 
+    /**
+     * This function shows the main menu
+     */
+    public void showPopup(View v) { // onClick method for menu button
+        PopupMenu popup = new PopupMenu(this, v);
+        popup.setOnMenuItemClickListener(this);
+        popup.inflate(R.menu.mainmenu);
+        popup.show();
+    }
+
+
+    // menu is set to not allow you switch activity when exercise is on
     @Override
     public boolean onMenuItemClick(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
@@ -308,40 +345,6 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     /*
      * Methods related to location permissions end here
      */
-
-    /**
-     * Loads credits from SharedPreferences. If data is not available (does not exist yet), function sets available credits to 0.
-     * If credits are found, the function updates the users' credits. On the first load, the function sets the value of
-     * isStartedBefore to true.
-     */
-    private void loadCredits() {
-        SharedPreferences sharedPreferences = getSharedPreferences("credit preferences", MODE_PRIVATE);
-        String amount = sharedPreferences.getString("credits", null);
-        WalletSingleton walletSingleton = WalletSingleton.getInstance();
-        if (amount == null) {
-            walletSingleton.setCredits(0);
-            Log.d("debug", "no credits at preferences");
-        } else {
-            walletSingleton.setCredits(Integer.parseInt(amount));
-            Log.d("debug", "credits loaded");
-        }
-
-        isStartedBefore = true;
-    }
-
-
-    /**
-     * Saves credits into SharedPreferences as String.
-     */
-    private void saveCredits() {
-        SharedPreferences sharedPreferences = getSharedPreferences("credit preferences", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        String amount = String.valueOf(WalletSingleton.getCredits());
-        Log.d("debug", amount);
-        editor.putString("credits", amount);
-        editor.apply();
-        Log.d("debug", "Credits SAVED!");
-    }
 
     @Override
     public void onBackPressed() {}

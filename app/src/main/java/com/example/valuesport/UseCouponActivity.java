@@ -42,10 +42,10 @@ public class UseCouponActivity extends AppCompatActivity {
 
     @Override
     protected void onPause() {
-        super.onPause();
-        Log.d("debug", "onPause() called");
         saveCredits();
         saveData();
+        super.onPause();
+        Log.d("debug", "onPause() called");
     }
 
     @Override
@@ -57,6 +57,8 @@ public class UseCouponActivity extends AppCompatActivity {
         if (b != null) {
             i = b.getInt("index", 0);
         }
+
+        // get data for views from WalletSingleton
         ((TextView) findViewById(R.id.title))
                 .setText(walletSingleton.getOwnedCoupons().get(i).getCouponTitle());
         ((TextView) findViewById(R.id.description))
@@ -74,7 +76,7 @@ public class UseCouponActivity extends AppCompatActivity {
                 getResources().getString(R.string.coupon_used), Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
-        finish();
+        finish(); // calls onDestroy() to UseCouponActivity and goes back to Wallet
         Intent Intent = new Intent(this, WalletActivity.class);
         startActivity(Intent);
     }
